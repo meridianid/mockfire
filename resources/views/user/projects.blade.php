@@ -15,9 +15,7 @@
                 </div>
                 <div class="box-body">
                     <strong>http://localhost:8000/{{ $data_project->endpoint }}/</strong>:endpoint <br />
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">
-                            New Resource
-                        </button>
+                        <a href="/project/{{ Auth::user()->id }}/p/{{ $data_project->id }}/new_resource" class="btn btn-primary">New Resource</a>
                         <br /><br />
 
                 </div><!-- /.box-body -->
@@ -28,44 +26,4 @@
         </div><!-- /.col -->
 
     </div><!-- /.row -->
-
-         <div class="modal fade" id="modal-default">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">New Resource</h4>
-              </div>
-              <form role="form" method="POST" action="{{action('ProjectController@add_project')}}">
-                {{ csrf_field() }}
-                  <div class="modal-body">
-                    <div class="form-group">
-                      <label for="ResourceName">Resource Name</label>
-                      <br /> Enter meaningful resource name, it will be used to generate RESTful API URLs <br />
-                      EXAMPLE: users, comments, articles 
-                      <input type="text" class="form-control" id="resourcename" placeholder="Enter Resource Name">
-                    </div>
-
-                    <div class="form-group">
-                      <label for="Endpoints">Endpoint</label>
-                      <br /> Enable/disable endpoints and customize response JSON <br />
-                      EXAMPLE: Custom response 
-                      <input type="text" class="form-control" id="resourcename" placeholder="Enter Resource Name">
-                    </div>
-
-
-                    <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Create</button>
-                  </div>
-              </form>
-            </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
-        </div>
 @endsection

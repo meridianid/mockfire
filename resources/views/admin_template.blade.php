@@ -17,6 +17,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{ asset("/bower_components/Ionicons/css/ionicons.min.css") }}" rel="stylesheet" type="text/css" />
   <!-- DataTables -->
   <link rel="stylesheet" href="{{ asset("/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css") }}">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{{ asset("/bower_components/select2/dist/css/select2.min.css") }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset("/bower_components/admin-lte/dist/css/AdminLTE.min.css") }}" rel="stylesheet" type="text/css" >
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
@@ -99,6 +101,8 @@ desired effect
 <script src="{{ asset("/bower_components/jquery/dist/jquery.min.js") }}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{{ asset("/bower_components/bootstrap/dist/js/bootstrap.min.js") }}"></script>
+<!-- Select2 -->
+<script src="{{ asset("/bower_components/select2/dist/js/select2.full.min.js") }}"></script>
 <!-- DataTables -->
 <script src="{{ asset("/bower_components/datatables.net/js/jquery.dataTables.min.js") }}"></script>
 <script src="{{ asset("/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js") }}"></script>
@@ -110,6 +114,9 @@ desired effect
      user experience. -->
 <script>
   $(function () {
+  	//Initialize Select2 Elements
+    $('.select2').select2()
+
     $('#data').DataTable()
     $('#table').DataTable({
       'paging'      : true,
@@ -122,19 +129,28 @@ desired effect
   })
 </script>
 
-@if ( Auth::user()->level == 'admin')
- <script type="text/javascript">
-  $(document).on('click', '.show-user', function() {
-      $('.modal-title').text('Show');
-      $('#id_show').val($(this).data('id'));
-      $('#name_show').val($(this).data('name'));
-      $('#email_show').val($(this).data('email'));
-      $('#balance_show').val($(this).data('balance'));
-      $('#level_show').val($(this).data('level'));
-      $('#showUser').modal('show');
-  });
-
-</script>
-@endif
+        <script>
+        $(document).ready(function() {
+            var max_fields      = 10; //maximum input boxes allowed
+            var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+            var add_button      = $(".add_field_button"); //Add button ID
+            
+            var x = 1; //initlal text box count
+            $(add_button).click(function(e){ //on add input button click
+                e.preventDefault();
+                if(x < max_fields){ //max input box allowed
+                    x++; //text box increment
+                    // $(wrapper).append('<div class="form-group"><input class="form-control" type="text" name="mytext[]"/><a href="#" class="remove_field"><i class="fa"></i></a></div>'); //add input box
+                    
+                    $(wrapper).append('<div><div class="col-xs-4"><input class="form-control" type="text" name="mytext[]" placeholder="Field Name"></div><div class="col-xs-4"><select class="form-control select2" name="type[]" style="width: 100%;"><optgroup label="ADDRESS"><option value="address.zipCode">Zip code</option><option value="address.city">City</option><option value="address.streetAddress">Street address</option><option value="address.secondaryAddress">Secondary address</option><option value="address.county">County</option><option value="address.country">Country</option><option value="address.state">State</option><option value="address.stateAbbr">State abbreviated</option><option value="address.latitude">Latitude</option><option value="address.longitude">Longitude</option></optgroup><optgroup label="COMMERCE"><option value="commerce.color">Color</option><option value="commerce.department">Department</option><option value="commerce.productName">Product name</option><option value="commerce.price">Price</option><option value="commerce.productAdjective">Product adjective</option><option value="commerce.productMaterial">Product material</option><option value="commerce.product">Product</option></optgroup><optgroup label="DATE"><option value="date.past">Past</option><option value="date.future">Future</option><option value="date.recent">Recent</option><option value="date.month">Month</option><option value="date.weekday">Weekday</option></optgroup><optgroup label="IMAGE"><option value="image.image">Image</option><option value="image.avatar">Avatar</option><option value="image.dataUri">Data URI</option></optgroup><optgroup label="NAME"><option value="name.firstName">First name</option><option value="name.lastName">Last name</option><option value="name.findName">Full name</option><option value="name.jobTitle">Job title</option><option value="name.prefix">Prefix</option><option value="name.suffix">Suffix</option><option value="name.title">Title</option><option value="name.jobDescriptor">Job descriptor</option><option value="name.jobArea">Job area</option><option value="name.jobType">Job type</option></optgroup><optgroup label="PHONE"><option value="phone.phoneNumber">Number</option></optgroup><optgroup label="RANDOM"><option value="random.number">Number</option><option value="random.uuid">UUID</option><option value="random.boolean">Boolean</option><option value="random.word">Word</option><option value="random.words">Words</option><option value="random.locale">Locale</option><option value="random.alphaNumeric">Alpha numeric</option></optgroup><optgroup label="SYSTEM"><option value="system.fileName">File name</option><option value="system.commonFileName">Common file name</option><option value="system.commonFileExt">Common file extension</option><option value="system.fileType">File type</option><option value="system.fileExt">File extension</option><option value="system.semver">Semver</option></optgroup></select></div><div class="col-xs-4"><input class="form-control" type="hidden" name="id_user" value="{{ Auth::user()->id }}"></p></div><a href="#" class="remove_field" title="Delete"><i class="fa fa-remove"></i></a></div><br>');
+                    // $(wrapper).append('<div><input type="text" name="mytext[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+		        }
+		    });
+            
+            $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+                e.preventDefault(); $(this).parent('div').remove(); x--;
+            })
+        });
+        </script>
 </body>
 </html>

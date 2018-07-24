@@ -24,8 +24,10 @@ Route::get('','UserController@page')->middleware('auth');
 
 // Project
 Route::post('/add_project', 'ProjectController@add_project')->middleware('auth');
+Route::post('/add_resource', 'ProjectController@add_resource')->middleware('auth');
 Route::get('project/{id}','ProjectController@get_project')->middleware('auth');
 Route::get('project/{id}/p/{id_project}','ProjectController@detail_project')->middleware('auth');
+Route::get('project/{id}/p/{id_project}/new_resource','ProjectController@new_resource')->middleware('auth');
 
 Auth::routes();
 
