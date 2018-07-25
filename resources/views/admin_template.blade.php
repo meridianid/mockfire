@@ -113,7 +113,7 @@ desired effect
      Both of these plugins are recommended to enhance the
      user experience. -->
 <script>
-  $(function () {
+  $(document).ready(function () {
   	//Initialize Select2 Elements
     $('.select2').select2()
 
@@ -132,7 +132,7 @@ desired effect
         <script>
         $(document).ready(function() {
             var max_fields      = 10; //maximum input boxes allowed
-            var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+            var wrapper         = $(".daftar-isi"); //Fields wrapper
             var add_button      = $(".add_field_button"); //Add button ID
             
             var a = 1; //initlal text box count
@@ -142,7 +142,7 @@ desired effect
                     a++; //text box increment
                     // $(wrapper).append('<div class="form-group"><input class="form-control" type="text" name="mytext[]"/><a href="#" class="remove_field"><i class="fa"></i></a></div>'); //add input box
                     
-                    $(wrapper).append('<div><div class="col-xs-4"><input class="form-control" type="text" name="mytext[]" placeholder="Field Name"></div><div class="col-xs-4"><select class="form-control select2 select_type" name="type[]" style="width: 100%;" id="type"><optgroup label="ADDRESS"><option value="address.zipCode">Zip code</option><option value="address.city">City</option><option value="address.streetAddress">Street address</option><option value="address.secondaryAddress">Secondary address</option><option value="address.county">County</option><option value="address.country">Country</option><option value="address.state">State</option><option value="address.stateAbbr">State abbreviated</option><option value="address.latitude">Latitude</option><option value="address.longitude">Longitude</option></optgroup><optgroup label="COMMERCE"><option value="commerce.color">Color</option><option value="commerce.department">Department</option><option value="commerce.productName">Product name</option><option value="commerce.price">Price</option><option value="commerce.productAdjective">Product adjective</option><option value="commerce.productMaterial">Product material</option><option value="commerce.product">Product</option></optgroup><optgroup label="DATE"><option value="date.past">Past</option><option value="date.future">Future</option><option value="date.recent">Recent</option><option value="date.month">Month</option><option value="date.weekday">Weekday</option></optgroup><optgroup label="IMAGE"><option value="image.image">Image</option><option value="image.avatar">Avatar</option><option value="image.dataUri">Data URI</option></optgroup><optgroup label="NAME"><option value="name.firstName">First name</option><option value="name.lastName">Last name</option><option value="name.findName">Full name</option><option value="name.jobTitle">Job title</option><option value="name.prefix">Prefix</option><option value="name.suffix">Suffix</option><option value="name.title">Title</option><option value="name.jobDescriptor">Job descriptor</option><option value="name.jobArea">Job area</option><option value="name.jobType">Job type</option></optgroup><optgroup label="PHONE"><option value="phone.phoneNumber">Number</option></optgroup><optgroup label="RANDOM"><option value="random.number">Number</option><option value="random.uuid">UUID</option><option value="random.boolean">Boolean</option><option value="random.word">Word</option><option value="random.words">Words</option><option value="random.locale">Locale</option><option value="random.alphaNumeric">Alpha numeric</option></optgroup><optgroup label="SYSTEM"><option value="system.fileName">File name</option><option value="system.commonFileName">Common file name</option><option value="system.commonFileExt">Common file extension</option><option value="system.fileType">File type</option><option value="system.fileExt">File extension</option><option value="system.semver">Semver</option></optgroup><optgroup label="OBJECT"><option value="object.object">Object</option></optgroup><optgroup label="ARRAY"><option value="array.array">Array</option></optgroup></select></div><p class="add_array"></p><div class="col-xs-4"><input class="form-control" type="hidden" name="id_user" value="{{ Auth::user()->id }}"></p></div><a href="#" class="remove_field" title="Delete"><i class="fa fa-remove"></i></a></div><br>');
+                    $(wrapper).append('<div class="skema"><div class="col-xs-4"><input class="form-control" type="text" name="mytext[]" placeholder="Field Name"></div><div class="col-xs-4"><select class="form-control select2 select_type" name="type[]" style="width: 100%;" id="type"><optgroup label="ADDRESS"><option value="address.zipCode">Zip code</option><option value="address.city">City</option><option value="address.streetAddress">Street address</option><option value="address.secondaryAddress">Secondary address</option><option value="address.county">County</option><option value="address.country">Country</option><option value="address.state">State</option><option value="address.stateAbbr">State abbreviated</option><option value="address.latitude">Latitude</option><option value="address.longitude">Longitude</option></optgroup><optgroup label="COMMERCE"><option value="commerce.color">Color</option><option value="commerce.department">Department</option><option value="commerce.productName">Product name</option><option value="commerce.price">Price</option><option value="commerce.productAdjective">Product adjective</option><option value="commerce.productMaterial">Product material</option><option value="commerce.product">Product</option></optgroup><optgroup label="DATE"><option value="date.past">Past</option><option value="date.future">Future</option><option value="date.recent">Recent</option><option value="date.month">Month</option><option value="date.weekday">Weekday</option></optgroup><optgroup label="IMAGE"><option value="image.image">Image</option><option value="image.avatar">Avatar</option><option value="image.dataUri">Data URI</option></optgroup><optgroup label="NAME"><option value="name.firstName">First name</option><option value="name.lastName">Last name</option><option value="name.findName">Full name</option><option value="name.jobTitle">Job title</option><option value="name.prefix">Prefix</option><option value="name.suffix">Suffix</option><option value="name.title">Title</option><option value="name.jobDescriptor">Job descriptor</option><option value="name.jobArea">Job area</option><option value="name.jobType">Job type</option></optgroup><optgroup label="PHONE"><option value="phone.phoneNumber">Number</option></optgroup><optgroup label="RANDOM"><option value="random.number">Number</option><option value="random.uuid">UUID</option><option value="random.boolean">Boolean</option><option value="random.word">Word</option><option value="random.words">Words</option><option value="random.locale">Locale</option><option value="random.alphaNumeric">Alpha numeric</option></optgroup><optgroup label="SYSTEM"><option value="system.fileName">File name</option><option value="system.commonFileName">Common file name</option><option value="system.commonFileExt">Common file extension</option><option value="system.fileType">File type</option><option value="system.fileExt">File extension</option><option value="system.semver">Semver</option></optgroup><optgroup label="OBJECT"><option value="object.object">Object</option></optgroup><optgroup label="ARRAY"><option value="array.array">Array</option></optgroup></select></div><p class="add_array"></p><div class="col-xs-4"><input class="form-control" type="hidden" name="id_user" value="{{ Auth::user()->id }}"></p></div><a href="#" class="remove_field" title="Delete"><i class="fa fa-remove"></i></a><div class="col-md-6 skema2"></div></div><br>');
                     // $(wrapper).append('<div><input type="text" name="mytext[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
 		        }
 		    });
@@ -155,11 +155,19 @@ desired effect
                           // alert( this.value );
                           var value_select_type = this.value;
                           if(value_select_type == 'array.array') {
-                          	$("p").closest( "p.add_array").append("<a class='add_field_button btn btn-primary' title='Add New Array' ><i class='fa fa-plus'></i></a>");
-  							console.log($("p").closest( "p.add_array"))
+                          	$(this).parents(".skema").find(".add_array").append("<a class='skema_add_field btn btn-primary' title='Add New Array' ><i class='fa fa-plus'></i></a>");
+  							console.log($(this).parents(".skema").find(".add_array"))
                                   // document.getElementByClass("add_array").innerHTML = "<a class='add_field_button btn btn-primary' title='Add New Array' ><i class='fa fa-plus'></i></a>";
-                               }
+                            } else {
+
+                            }
                         })
+        </script>
+        <script type="text/javascript">
+        	$(document).on('click', '.skema_add_field' ,function() {
+        		$(".skema2").append('<div class="form-group"><input class="form-control" type="text" placeholder="Input new field" name="mytext[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+        	});
+
         </script>
 </body>
 </html>

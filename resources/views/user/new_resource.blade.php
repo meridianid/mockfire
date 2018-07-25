@@ -25,24 +25,13 @@
                           </div>
 
                           <div class="form-group">
-                            <label for="Endpoints">Endpoint</label>
-                            <p> Enable/disable endpoints and customize response JSON</p>
-                            <p>EXAMPLE: Custom response </p>
-                            <code>
-                                <pre>$mockData</pre>
-                            </code>
-                            or
-                            <code>
-                                <pre>{
-  "anyKey": "anyValue",
-  "items": "$mockData"
-  "count": "$count"
-}</pre>
-                            </code>
-                              <div class="col-xs-12">
-                               <input type="radio" name="method" value="POST"> POST
-                               <input type="radio" name="method" value="GET"> GET
-                              </div>
+                            <label for="Endpoints">Method</label>
+                               <select name="method" class="form-control">
+                                  <option value="POST">POST</option>
+                                  <option value="GET">GET</option>
+                                  <option value="DELETE">DELETE</option>
+                                  <option value="PUT">PUT</option>
+                               </select>
                           </div>
 
                           <div class="form-group">
@@ -57,7 +46,7 @@
 
                       <div class="form-group">
                           <button class="add_field_button btn btn-primary" title="Add New Field"><i class="fa fa-plus"></i></button> <br><br>
-                          <div class="row input_fields_wrap">
+                          <div class="row daftar-isi">
                               <div class="col-xs-4">
                                 <input class="form-control" type="text" name="mytext[]" value="id">
                               </div>
