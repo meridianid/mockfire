@@ -54,6 +54,7 @@
                               </div> -->
                           </div>
 
+
                       <div class="form-group">
                           <button class="add_field_button btn btn-primary" title="Add New Field"><i class="fa fa-plus"></i></button> <br><br>
                           <div class="row input_fields_wrap">
@@ -66,6 +67,18 @@
                               <br><br>
                           </div>
                       </div>
+                      <script type ="text/javascript">
+                        // function myFunction() {
+                        //   var x = document.getElementById("type").value;
+                        //        if(x == 'array.array') {
+                        //           // document.getElementById("jml_komn").innerHTML = "Komentar";
+                        //           document.getElementByClass("add_array").innerHTML = "<a class='add_field_button btn btn-primary' title='Add New Array' ><i class='fa fa-plus'></i></a>";
+                        //        }
+                            
+                        // }
+                      </script>
+
+                      
 
                           <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
                   
