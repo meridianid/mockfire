@@ -47,12 +47,14 @@
                       <div class="form-group">
                           <button class="add_field_button btn btn-primary" title="Add New Field"><i class="fa fa-plus"></i></button> <br><br>
                           <div class="row daftar-isi">
+                            <div class="skema">
                               <div class="col-xs-4">
-                                <input class="form-control" type="text" name="mytext[]" value="id">
+                                <input class="form-control namefield" type="text" name="field1[key]" value="id">
                               </div>
                               <div class="col-xs-4">
-                                <input class="form-control" type="text" name="mytext2[]" value="Object ID">
+                                <input class="form-control valuefield" type="text" name="field1[value]"value="Object ID">
                               </div>
+                            </div>
                               <br><br>
                           </div>
                       </div>
