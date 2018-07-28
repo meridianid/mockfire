@@ -21,7 +21,7 @@
                             <label for="ResourceName">Resource Name</label>
                             <p>Enter meaningful resource name, it will be used to generate RESTful API URLs</p>
                             <p>EXAMPLE: users, comments, articles </p>
-                            <input type="text" class="form-control" id="resourcename" name="resource_name" placeholder="Enter Resource Name">
+                            <input type="text" class="form-control" id="resourcename" name="resource_name" onkeyup="nospaces(this)" placeholder="Enter Resource Name">
                           </div>
 
                           <div class="form-group">
@@ -49,10 +49,10 @@
                           <div class="row daftar-isi">
                             <div class="skema">
                               <div class="col-xs-4">
-                                <input class="form-control namefield" type="text" name="field1[key]" value="id">
+                                <input class="form-control namefield" type="text" onkeyup="nospaces(this)" name="field[field1][key]" value="id">
                               </div>
                               <div class="col-xs-4">
-                                <input class="form-control valuefield" type="text" name="field1[value]"value="Object ID">
+                                <input class="form-control valuefield" type="text" name="field[field1][value]"value="ObjectID" readonly="">
                               </div>
                             </div>
                               <br><br>

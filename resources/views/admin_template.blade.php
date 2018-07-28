@@ -128,7 +128,17 @@ desired effect
     })
   })
 </script>
+		
+		<script type="text/javascript">
 
+		function nospaces(t){
+			if(t.value.match(/\s/g)){
+				// alert('Sorry, you are not allowed to enter any spaces');
+				t.value=t.value.replace(/\s/g,'');
+			}
+		}
+
+		</script>
         <script>
         $(document).ready(function() {
         	console.log("Powered By LENGKOMEDIA.com")
@@ -146,9 +156,10 @@ desired effect
                     var fieldbaru = $('.skema').last().find('.namefield').attr('name')
                     
                     no++;
-                    var tes = fieldbaru.replace(fieldbaru,'field'+no);
+                    var tes = fieldbaru.replace(fieldbaru,'field[field'+no+']');
+                    // console.log(tes);
 
-                    $(wrapper).append('<div class="skema"><div class="col-xs-4"><input class="form-control namefield" type="text" name="'+tes+'[key]" placeholder="Field Name"></div><div class="col-xs-4"><select class="form-control select2 select_type" name="'+tes+'[value]" style="width: 100%;" id="type"><optgroup label="ADDRESS"><option value="address.zipCode">Zip code</option><option value="address.city">City</option><option value="address.streetAddress">Street address</option><option value="address.secondaryAddress">Secondary address</option><option value="address.county">County</option><option value="address.country">Country</option><option value="address.state">State</option><option value="address.stateAbbr">State abbreviated</option><option value="address.latitude">Latitude</option><option value="address.longitude">Longitude</option></optgroup><optgroup label="COMMERCE"><option value="commerce.color">Color</option><option value="commerce.department">Department</option><option value="commerce.productName">Product name</option><option value="commerce.price">Price</option><option value="commerce.productAdjective">Product adjective</option><option value="commerce.productMaterial">Product material</option><option value="commerce.product">Product</option></optgroup><optgroup label="DATE"><option value="date.past">Past</option><option value="date.future">Future</option><option value="date.recent">Recent</option><option value="date.month">Month</option><option value="date.weekday">Weekday</option></optgroup><optgroup label="IMAGE"><option value="image.image">Image</option><option value="image.avatar">Avatar</option><option value="image.dataUri">Data URI</option></optgroup><optgroup label="NAME"><option value="name.firstName">First name</option><option value="name.lastName">Last name</option><option value="name.findName">Full name</option><option value="name.jobTitle">Job title</option><option value="name.prefix">Prefix</option><option value="name.suffix">Suffix</option><option value="name.title">Title</option><option value="name.jobDescriptor">Job descriptor</option><option value="name.jobArea">Job area</option><option value="name.jobType">Job type</option></optgroup><optgroup label="PHONE"><option value="phone.phoneNumber">Number</option></optgroup><optgroup label="RANDOM"><option value="random.number">Number</option><option value="random.uuid">UUID</option><option value="random.boolean">Boolean</option><option value="random.word">Word</option><option value="random.words">Words</option><option value="random.locale">Locale</option><option value="random.alphaNumeric">Alpha numeric</option></optgroup><optgroup label="SYSTEM"><option value="system.fileName">File name</option><option value="system.commonFileName">Common file name</option><option value="system.commonFileExt">Common file extension</option><option value="system.fileType">File type</option><option value="system.fileExt">File extension</option><option value="system.semver">Semver</option></optgroup><optgroup label="OBJECT"><option value="object.coy">Object</option></optgroup><optgroup label="ARRAY"><option value="array">Array</option></optgroup></select></div><p class="add_array"><a href="#" class="remove_field" title="Delete"><i class="fa fa-remove"></i></a></p><div class="col-xs-4"></div><div class="col-md-4 skema2"></div><div class="col-md-4 skema3"></div></div><br>');
+                    $(wrapper).append('<div class="skema"><div class="col-xs-4"><input class="form-control namefield" onkeyup="nospaces(this)" type="text" name="'+tes+'[key]" placeholder="Field Name"></div><div class="col-xs-4"><select class="form-control select2 select_type" name="'+tes+'[value]" style="width: 100%;" id="type"><optgroup label="ADDRESS"><option value="address.zipCode">Zip code</option><option value="address.city">City</option><option value="address.streetAddress">Street address</option><option value="address.secondaryAddress">Secondary address</option><option value="address.county">County</option><option value="address.country">Country</option><option value="address.state">State</option><option value="address.stateAbbr">State abbreviated</option><option value="address.latitude">Latitude</option><option value="address.longitude">Longitude</option></optgroup><optgroup label="COMMERCE"><option value="commerce.color">Color</option><option value="commerce.department">Department</option><option value="commerce.productName">Product name</option><option value="commerce.price">Price</option><option value="commerce.productAdjective">Product adjective</option><option value="commerce.productMaterial">Product material</option><option value="commerce.product">Product</option></optgroup><optgroup label="DATE"><option value="date.past">Past</option><option value="date.future">Future</option><option value="date.recent">Recent</option><option value="date.month">Month</option><option value="date.weekday">Weekday</option></optgroup><optgroup label="IMAGE"><option value="image.image">Image</option><option value="image.avatar">Avatar</option><option value="image.dataUri">Data URI</option></optgroup><optgroup label="NAME"><option value="name.firstName">First name</option><option value="name.lastName">Last name</option><option value="name.findName">Full name</option><option value="name.jobTitle">Job title</option><option value="name.prefix">Prefix</option><option value="name.suffix">Suffix</option><option value="name.title">Title</option><option value="name.jobDescriptor">Job descriptor</option><option value="name.jobArea">Job area</option><option value="name.jobType">Job type</option></optgroup><optgroup label="PHONE"><option value="phone.phoneNumber">Number</option></optgroup><optgroup label="RANDOM"><option value="random.number">Number</option><option value="random.uuid">UUID</option><option value="random.boolean">Boolean</option><option value="random.word">Word</option><option value="random.words">Words</option><option value="random.locale">Locale</option><option value="random.alphaNumeric">Alpha numeric</option></optgroup><optgroup label="SYSTEM"><option value="system.fileName">File name</option><option value="system.commonFileName">Common file name</option><option value="system.commonFileExt">Common file extension</option><option value="system.fileType">File type</option><option value="system.fileExt">File extension</option><option value="system.semver">Semver</option></optgroup><optgroup label="OBJECT"><option value="object.coy">Object</option></optgroup><optgroup label="ARRAY"><option value="array">Array</option></optgroup></select></div><p class="add_array"><a href="#" class="remove_field" title="Delete"><i class="fa fa-remove"></i></a></p><div class="col-xs-4"></div><div class="col-md-4 skema2"></div><div class="col-md-4 skema3"></div></div><br>');
 		        }
 		    });
             
@@ -164,12 +175,7 @@ desired effect
                           var value_select_type = this.value;
                           if(value_select_type == 'array') {
                           	$(this).parents(".skema").find(".add_array").append("<a class='skema_add_field btn btn-primary' title='Add New Array' ><i class='fa fa-plus'></i></a>");
-  							// console.log($(this).parents(".skema").find(".add_array"))
-                                  // document.getElementByClass("add_array").innerHTML = "<a class='add_field_button btn btn-primary' title='Add New Array' ><i class='fa fa-plus'></i></a>";
                             } else {
-                            	// $( ".skema_add_field" ).remove();
-                            	// $( ".new_form" ).remove();
-                            	// $( ".new_form2" ).remove();
                             	// console.log($(this).parents(".add_array").find(".skema_add_field").remove()) 
                             	// $(this).parent(".skema").find(".skema2").remove()
                             	console.log($(this).parents(".skema").find(".skema_add_field").remove())
@@ -192,32 +198,35 @@ desired effect
                 x--;
             })
 
-        	// var nomor = 1;
         	$(document).on('click', '.skema_add_field' ,function() {
         		var isi = $(".select_type").val()
         		// alert($(isi))
         		if(x < 11) {
         			x++;
 
-        			// console.log($('.skema').last().find('.namefield').attr('name'))
-        			// var search_field = $('.skema').last().find('.valuefield').attr('name')
         			var search_field = $(this).parents('.skema').find('.select_type').attr('name')
         			console.log(search_field);
-        			// nomor++;
-        			// var no_field = search_field.replace(search_field,'field'+nomor);
-        			// var nomor2 = nomor - 1
-        			// var no_field = search_field.replace(search_field,'field'+nomor2);
-        			// console.log(no_field);
-
-
         			
-        			$(this).parents(".skema").find(".skema2").append('<div class="new_form form-group"><input class="form-control" name="'+search_field+'['+isi+'][]" type="text" placeholder="Input new field '+isi+'"/></div>'); //add input box
+        			$(this).parents(".skema").find(".skema2").append('<div class="new_form form-group"><input class="get_input form-control" name="'+search_field+'['+isi+'][data][]" onkeyup="nospaces(this)" type="text" placeholder="New Field for '+isi+'"/></div>'); //add input box
         			
         			// $(this).parents(".skema").find(".skema2").append('<div class="new_form form-group"><input class="form-control" name="field2['+isi+'][key]" type="text" placeholder="Input new field '+isi+'"/></div>');
 
-        			$(this).parents(".skema").find(".skema3").append('<div class="new_form2 form-group"><select class="form-control select2" name="'+search_field+'['+isi+'][]" style="width: 100%;"><option value="TES">TESS</option></select></div>');
+       				// CODE BEFORE line 216
+       				// $(this).parents(".skema").find(".skema3").append('<div class="new_form2 form-group"><select class="get_input2 form-control select2" name="'+search_field+'['+isi+'][type][]" style="width: 100%;"><option value="TES">TESS</option></select></div>');
+
+       				$(this).parents(".skema").find(".skema3").append('<div class="new_form2 form-group"><select class="form-control select2" name="'+search_field+'['+isi+'][type][]" style="width: 100%;" id="type"><optgroup label="ADDRESS"><option value="address.zipCode">Zip code</option><option value="address.city">City</option><option value="address.streetAddress">Street address</option><option value="address.secondaryAddress">Secondary address</option><option value="address.county">County</option><option value="address.country">Country</option><option value="address.state">State</option><option value="address.stateAbbr">State abbreviated</option><option value="address.latitude">Latitude</option><option value="address.longitude">Longitude</option></optgroup><optgroup label="COMMERCE"><option value="commerce.color">Color</option><option value="commerce.department">Department</option><option value="commerce.productName">Product name</option><option value="commerce.price">Price</option><option value="commerce.productAdjective">Product adjective</option><option value="commerce.productMaterial">Product material</option><option value="commerce.product">Product</option></optgroup><optgroup label="DATE"><option value="date.past">Past</option><option value="date.future">Future</option><option value="date.recent">Recent</option><option value="date.month">Month</option><option value="date.weekday">Weekday</option></optgroup><optgroup label="IMAGE"><option value="image.image">Image</option><option value="image.avatar">Avatar</option><option value="image.dataUri">Data URI</option></optgroup><optgroup label="NAME"><option value="name.firstName">First name</option><option value="name.lastName">Last name</option><option value="name.findName">Full name</option><option value="name.jobTitle">Job title</option><option value="name.prefix">Prefix</option><option value="name.suffix">Suffix</option><option value="name.title">Title</option><option value="name.jobDescriptor">Job descriptor</option><option value="name.jobArea">Job area</option><option value="name.jobType">Job type</option></optgroup><optgroup label="PHONE"><option value="phone.phoneNumber">Number</option></optgroup><optgroup label="RANDOM"><option value="random.number">Number</option><option value="random.uuid">UUID</option><option value="random.boolean">Boolean</option><option value="random.word">Word</option><option value="random.words">Words</option><option value="random.locale">Locale</option><option value="random.alphaNumeric">Alpha numeric</option></optgroup><optgroup label="SYSTEM"><option value="system.fileName">File name</option><option value="system.commonFileName">Common file name</option><option value="system.commonFileExt">Common file extension</option><option value="system.fileType">File type</option><option value="system.fileExt">File extension</option><option value="system.semver">Semver</option></optgroup></select></div>');
+
+        			// $(this).parents(".skema").find(".skema3").append('<div class="new_form2 form-group"><select class="get_input2 form-control select2" name="" style="width: 100%;"><option value="TES">TESS</option></select></div>');
         			// $(this).parents(".skema").find(".skema4").append('<a href="#" class="remove_field2" title="Delete field array"><i class="fa fa-remove"></i></a>');
-        			console.log($(this).parents(".skema").find(".skema3"))
+        			// console.log($(this).parents(".skema").find(".skema3"))
+
+        			// console.log($('input[name="field1[key]"]')).val()
+        			// var inputan = $(".get_input").val();
+        			// var inputan = $(this).parents(".get_input")
+        			// var cobaah = $(".get_input2").attr('name',search_field+'['+isi+']['+inputan+']');
+        			// var cobaah = $(this).parents(".skema3").find("get_input2").attr('name',inputan);
+        			// console.log(inputan)
+       				
         		}
         	});
 

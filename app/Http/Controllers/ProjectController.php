@@ -58,6 +58,34 @@ class ProjectController extends Controller
     }
 
     public function add_resource(Request $request) {
-    	return $request->all();
+    	// return $request->all();
+
+    	// $data =  
+    	// $data = $request->all();
+    	// foreach ($data as $key => $value) {
+    	// 	echo $key." ";
+    	// }
+    	// return;
+
+    	// $data = $request;
+    	// return $request->all();
+    	// return var_dump($request->all());
+    	// $coba = $request->all();
+    	$decode = $request->all();
+    	// return $decode;
+    	var_dump($decode['field']);
+    	$field = [];
+    	foreach ($decode['field'] as $value) {
+    		// echo $value['key']." ";
+    		$field[$value['key']]= $value['value'];
+    	}
+    	var_dump($field);
+  //   	if (is_array($decode) || is_object($decode))
+		// {
+		//     foreach ($decode as $data)
+		//     {
+		//         echo $data->field;
+		//     }
+		// }
     }
 }
