@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Faker\Factory as Faker;
+use App\Skema;
 
 class TestController extends Controller
 {
@@ -34,6 +36,11 @@ class TestController extends Controller
                         'color' => 'success'
                 ]
         ];
-        return view('page')->with($data);
+        // return view('page')->with($data)->with(child);
+        return Skema::with('child')->get();
+        // require_once '.../../path/to/Faker/src/autoload.php';
+        $faker = Faker::create();
+
+        echo $faker->hexcolor;
     }
 }

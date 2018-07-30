@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Project;
 use App\User;
-use App\Resouce;
-use App\Schema;
+use App\Resource;
+use App\Skema;
+use Faker\Factory as Faker;
 
 use Storage;
 
@@ -48,7 +49,23 @@ class ProjectController extends Controller
     public function detail_project(Request $request, $id, $id_project) {
     	$user = User::where('id',$id)->first();
     	$project = Project::where('user_id',$id)->where('id',$id_project)->first();
-    	return view('user.projects')->with('data_user',$user)->with('data_project',$project);
+    	if($project){
+    		$resource = Resource::where('project_id',$id_project)->get();
+    		return view('user.projects')->with('data_resource',$resource)->with('data_project',$project);
+    	}
+    	
+    }
+
+    public function edit_resource(Request $request, $id, $id_project, $id_resources) {
+    	$user = User::where('id',$id)->first();
+    	$project = Project::where('user_id',$id)->where('id',$id_project)->first();
+    	if($project){
+    		$resource = Resource::where('id',$id_resources)->first();
+    		$skema = Skema::where('resource_id',$id_resources)->get();
+    		// return $skema;
+    		return view('user.edit_resource')->with('data_skema',$skema)->with('data_project',$project)->with('data_resource',$resource);
+    	}
+    	
     }
 
     public function new_resource(Request $request, $id, $id_project) {
@@ -60,32 +77,66 @@ class ProjectController extends Controller
     public function add_resource(Request $request) {
     	// return $request->all();
 
-    	// $data =  
-    	// $data = $request->all();
-    	// foreach ($data as $key => $value) {
-    	// 	echo $key." ";
-    	// }
-    	// return;
-
-    	// $data = $request;
-    	// return $request->all();
-    	// return var_dump($request->all());
-    	// $coba = $request->all();
     	$decode = $request->all();
-    	// return $decode;
-    	var_dump($decode['field']);
+    	// return $decode['field'];
+    	// var_dump($decode['field']);
+    	// return $decode['field'];
+    	// return count($decode['field']);
     	$field = [];
-    	foreach ($decode['field'] as $value) {
+    	$coy = time();
+
+    	$create_resource = Resource::create([
+	            'project_id' => $request->project_id,
+	            'name_resource' => $request->resource_name,
+	            'type' => $request->method,
+	        ]);
+
+    	foreach ($decode['field'] as $key => $form) {
     		// echo $value['key']." ";
-    		$field[$value['key']]= $value['value'];
+    		$form['key'];
+    		$form['value'];
+
+    		if(is_array($form['value'])) {
+    			$val= 'array';
+    		}else{
+    			$val= $form['value'];
+    		}
+
+	        $create_schema = Skema::create([
+	            'resource_id' => $create_resource->id,
+	            'name_schema' => $form['key'],
+	            'type_schema' => $val,
+	            'parent_id' => '',
+	        ]);
+
+    		if(is_array($form['value'])) {
+    			foreach ($form['value']['array']['data'] as $key => $value) {
+    				Skema::create([
+			            'resource_id' => $create_resource->id,
+			            'name_schema' => $value,
+			            'type_schema' => $form['value']['array']['type'][$key],
+			            'parent_id' => $create_schema->id,
+			        ]);
+    			}
+
+    		}
+
     	}
-    	var_dump($field);
-  //   	if (is_array($decode) || is_object($decode))
-		// {
-		//     foreach ($decode as $data)
-		//     {
-		//         echo $data->field;
-		//     }
-		// }
+    }
+
+    public function generate_data(Request $request)
+    {
+    	// return $request->all();
+
+    	$data = Skema::where('resource_id',$request->resource_id)->with('child')->get();
+    	// return $data;
+    	$faker = Faker::create();
+    	foreach ($data as $key) {
+    		foreach($key->child as $value) {
+    			$d = $value->type_schema;
+    			echo "<p>".$value->name_schema." : ".$faker->$d."</p>";
+
+    		}
+    	}
     }
 }

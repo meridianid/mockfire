@@ -20,7 +20,16 @@
 
                 </div><!-- /.box-body -->
                 <div class="box-footer">
-                   
+                   -- Your Resource --
+                   @foreach ($data_resource as $data)
+                        <p><a href="/project/{{ Auth::user()->id }}/p/{{ $data_project->id }}/resource/{{ $data->id }}">Resource {{ $data->name_resource }}</a> --- 
+                            <form class="form-horizontal" method="POST" action="{{action('ProjectController@generate_data')}}">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="resource_id" value="{{ $data->id }}">
+                                <button type="submit" class="btn btn-primary">Generate Data for <strong>{{ $data->name_resource }}</strong></button>
+                            </form>
+                        </p>
+                   @endforeach
                 </div><!-- /.box-footer-->
             </div><!-- /.box -->
         </div><!-- /.col -->

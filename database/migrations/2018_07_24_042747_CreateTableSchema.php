@@ -13,7 +13,7 @@ class CreateTableSchema extends Migration
      */
     public function up()
     {
-        Schema::create('schema', function (Blueprint $table) {
+        Schema::create('skema', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('resource_id')->unsigned();
             $table->foreign('resource_id')->references('id')->on('resources');
