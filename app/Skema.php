@@ -9,7 +9,7 @@ class Skema extends Model
 	protected $table = "skema";
 
     protected $fillable = [
-    	'resource_id', 'name_schema', 'type_schema', 'parent_id'
+    	'resource_id', 'name_schema', 'type_schema', 'parent_id', 'field'
     ];
 
     public function schema() {

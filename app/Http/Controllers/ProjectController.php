@@ -93,6 +93,7 @@ class ProjectController extends Controller
 
     	foreach ($decode['field'] as $key => $form) {
     		// echo $value['key']." ";
+    		// echo $key;
     		$form['key'];
     		$form['value'];
 
@@ -102,20 +103,23 @@ class ProjectController extends Controller
     			$val= $form['value'];
     		}
 
+    		// echo $key." ";
 	        $create_schema = Skema::create([
 	            'resource_id' => $create_resource->id,
 	            'name_schema' => $form['key'],
 	            'type_schema' => $val,
 	            'parent_id' => '',
+	            'field' => $key,
 	        ]);
 
     		if(is_array($form['value'])) {
-    			foreach ($form['value']['array']['data'] as $key => $value) {
+    			foreach ($form['value']['array']['data'] as $ki => $value) {
     				Skema::create([
 			            'resource_id' => $create_resource->id,
 			            'name_schema' => $value,
-			            'type_schema' => $form['value']['array']['type'][$key],
+			            'type_schema' => $form['value']['array']['type'][$ki],
 			            'parent_id' => $create_schema->id,
+			            'field' => $key,
 			        ]);
     			}
 
@@ -138,5 +142,10 @@ class ProjectController extends Controller
 
     		}
     	}
+    }
+
+    public function edit_resource_update(Request $request)
+    {
+    	return $request->all();
     }
 }

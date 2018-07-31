@@ -1,4 +1,4 @@
-@extends('admin_template')
+@extends('edit_template')
 
 @section('content')
 <a href="/project/{{ Auth::user()->id }}" class="btn bg-olive margin">Project</a> <button type="button" class="btn bg-olive margin"><i class="fa fa-arrow-right"></i></button>  <a href="/project/{{ Auth::user()->id }}/p/{{ $data_project->id }}" class="btn bg-olive margin"><strong>{{ $data_project->name_project }}</strong></a> <button type="button" class="btn bg-olive margin"><i class="fa fa-arrow-right"></i></button>  <a class="btn bg-olive margin"><strong>{{ $data_resource->name_resource }}</strong></a>
@@ -14,9 +14,9 @@
                     </div>
                 </div>
                 <div class="box-body">
-                    <form role="form" method="POST" action="{{action('ProjectController@add_resource')}}">
+                    <form role="form" method="POST" action="{{action('ProjectController@edit_resource_update')}}">
                       {{ csrf_field() }}
-                      <!-- <input type="hidden" name="project_id" value="{{ $data_project->id }}"> -->
+                      <input type="hidden" name="project_id" value="{{ $data_resource->id }}">
                         <div class="modal-body">
                           <div class="form-group">
                             <label for="Endpoints">Method</label>
@@ -39,7 +39,7 @@
                           </div>
 
 
-                      <div class="form-group">
+                      <!-- <div class="form-group">
                           <button class="add_field_button btn btn-primary" title="Add New Field"><i class="fa fa-plus"></i></button> <br><br>
                           <div class="row daftar-isi">
                             <div class="skema">
@@ -52,28 +52,51 @@
                             </div>
                               <br><br>
                           </div>
-                      </div>
-                      @foreach($data_skema as $data)
-                      		@if($data->type_schema == 'array')
-                     			<p>ID Skema : {{ $data->id }} Name Skema : {{ $data->name_schema }} | Type : {{ $data->type_schema }} --- 
-                     		@elseif($data->parent_id != '')
-                     			<ul><li>Name Skema : {{ $data->name_schema }} | Type : {{ $data->type_schema }} | Parent : {{ $data->parent_id }}</li></ul></p>
-                     		@else
-                     			<p>Name Skema : {{ $data->name_schema }} | Type : {{ $data->type_schema }}</p>
-                     		@endif
-                  	  @endforeach
-                      <script type ="text/javascript">
-                        // function myFunction() {
-                        //   var x = document.getElementById("type").value;
-                        //        if(x == 'array.array') {
-                        //           // document.getElementById("jml_komn").innerHTML = "Komentar";
-                        //           document.getElementByClass("add_array").innerHTML = "<a class='add_field_button btn btn-primary' title='Add New Array' ><i class='fa fa-plus'></i></a>";
-                        //        }
-                            
-                        // }
-                      </script>
-
-                      
+                      </div> -->
+                      <div class="form-group">
+                      	<button class="add_field_button btn btn-primary" title="Add New Field"><i class="fa fa-plus"></i></button><br><br>
+                      	<div class="row daftar-isi">
+                      		@php $no = 1; @endphp
+		                      @foreach($data_skema as $data)
+		                      		@if($data->type_schema == 'array')
+		                     			<!-- <br><br><p>ID Skema : {{ $data->id }} Name Skema : {{ $data->name_schema }} | Type : {{ $data->type_schema }} ---  -->
+		                     			<div class="skema">
+		                     				<div class="col-xs-4">
+		                     					<input type="text" class="form-control namefield" onkeyup="nospaces(this)" name="field[{{ $data->field }}][key]" value="{{ $data->name_schema }}">
+		                     				</div>
+		                     				<div class="col-xs-4">
+		                     					<input type="text" class="form-control valuefield" onkeyup="nospaces(this)" name="field[{{ $data->field }}][value]" value="{{ $data->type_schema }}">
+		                     				</div>
+		                     					<p class="add_array"><a href="#" class="remove_field" title="Delete"><i class="fa fa-remove"></i></a><a class="skema_add_field btn btn-primary" title="Add New Array"><i class="fa fa-plus"></i></a></p>
+		                     		@elseif($data->parent_id != '')
+		                     			<!-- <ul><li>Name Skema : {{ $data->name_schema }} | Type : {{ $data->type_schema }} | Parent : {{ $data->parent_id }}</li></ul></p> -->
+		                     				<div class="col-xs-4"></div>
+				                     			<div class="col-md-4 skema">
+				                     				<div class="new_form form-group">
+				                     					<input type="text" class="form-control namefield" onkeyup="nospaces(this)" name="field[{{ $data->field }}][value][array][data][]" value="{{ $data->name_schema }}">
+				                     				</div>	
+				                     	 		</div>
+				                     			<div class="col-md-4 skema">
+				                     				<div class="new_form form-group">
+				                     					<input type="text" class="form-control valuefield" onkeyup="nospaces(this)" name="field[{{ $data->field }}][value][array][type][]" value="{{ $data->type_schema }}">	
+				                     				</div>
+				                     			</div>
+			                     		</div>
+		                     		@else
+		                     			<div class="skema">
+			                     			<div class="col-xs-4">
+			                     				<input type="text" class="form-control namefield" onkeyup="nospaces(this)" name="field[{{ $data->field }}][data]" value="{{ $data->name_schema }}">
+			                     			</div>	
+			                     			<div class="col-xs-4">
+			                     				<input type="text" class="form-control valuefield" name="field[{{ $data->field }}][value]" onkeyup="nospaces(this)" value="{{ $data->type_schema }}">
+			                     			</div>
+			                     			<br><br>
+			                     		</div>
+		                     		@endif
+		                  	  @endforeach
+		                  	
+	                  	</div>
+	                   </div>                      
 
                           <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
                   

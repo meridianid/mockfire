@@ -25,6 +25,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
   <link rel="stylesheet" href="{{ asset("/bower_components/admin-lte/dist/css/skins/skin-blue-light.min.css") }}" rel="stylesheet" type="text/css" >
+  <style>
+  .highlight {
+    background-color: yellow;
+  }
+  </style>
 <!--   <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
   <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script> -->
 
@@ -141,20 +146,28 @@ desired effect
 		</script>
         <script>
         $(document).ready(function() {
-        	console.log("Powered By LENGKOMEDIA.com")
+        	console.log("Powered By LENGKOMEDIA.com - Edit")
             var max_fields      = 10; //maximum input boxes allowed
             var wrapper         = $(".daftar-isi"); //Fields wrapper
             var add_button      = $(".add_field_button"); //Add button ID
             
             var a = 1; //initlal text box count
-            var no = 1;
-            // console.log($('.skema').last().find('.namefield').attr('name'))
+            // var no = 1;
+
+            console.log($('.namefield').last().attr('name'))
+            // NGECEK YG TERAKHIR = var carifield = $('.namefield').last().addClass( "highlight" ).attr('name').split('[')
+            var carifield = $('.namefield').last().attr('name').split('[')
+            var carilagi = carifield[1].split(']');
+            var carilagi2 = carilagi[0].split(',');
+            var carilagi3 = carilagi2[0].split('field');
+            var no = carilagi3[1];
             $(add_button).click(function(e){ //on add input button click
                 e.preventDefault();
                 if(a < max_fields){ //max input box allowed
                     a++; //text box increment
                     // console.log($('.skema').last().find('.namefield').attr('name'))
-                    var fieldbaru = $('.skema').last().find('.namefield').attr('name')
+                    // console.log($('.skema').find('.namefield').attr('name'))
+                    var fieldbaru = $('.skema').find('.namefield').attr('name')
                     
                     no++;
                     var tes = fieldbaru.replace(fieldbaru,'field[field'+no+']');
@@ -200,8 +213,9 @@ desired effect
             })
 
         	$(document).on('click', '.skema_add_field' ,function() {
-        		var isi = $(".select_type").val()
-        		// alert($(isi))
+        		// var isi = $(".select_type").addClass( "highlight" ).val()
+        		var isi = $(this).parents(".skema").find(".select_type").val()
+        		// alert(isi)
         		if(x < 11) {
         			x++;
 

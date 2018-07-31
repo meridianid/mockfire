@@ -26,6 +26,7 @@ Route::get('','UserController@page')->middleware('auth');
 // Project
 Route::post('/add_project', 'ProjectController@add_project')->middleware('auth');
 Route::post('/add_resource', 'ProjectController@add_resource')->middleware('auth');
+Route::post('/edit_resource_update', 'ProjectController@edit_resource_update')->middleware('auth');
 Route::post('/generate_data','ProjectController@generate_data')->middleware('auth');
 Route::get('project/{id}','ProjectController@get_project')->middleware('auth');
 Route::get('project/{id}/p/{id_project}','ProjectController@detail_project')->middleware('auth');
