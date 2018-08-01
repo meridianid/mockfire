@@ -7,12 +7,23 @@ use App\Project;
 use App\User;
 use App\Resource;
 use App\Skema;
+use App\Skemaopsi;
+use App\Skemaopsigroup;
 use Faker\Factory as Faker;
 
 use Storage;
 
 class ProjectController extends Controller
 {
+	// Load data dari Tabel Skemaopsi
+
+	public function loadData(Request $request)
+	{
+		$data = Skemaopsi::get();
+
+		return response()->json($data);
+	}
+
     public function add_project(Request $request) {
     	// return $request->all();
 
@@ -58,20 +69,30 @@ class ProjectController extends Controller
 
     public function edit_resource(Request $request, $id, $id_project, $id_resources) {
     	$user = User::where('id',$id)->first();
-    	$project = Project::where('user_id',$id)->where('id',$id_project)->first();
-    	if($project){
-    		$resource = Resource::where('id',$id_resources)->first();
-    		$skema = Skema::where('resource_id',$id_resources)->get();
+    	$data_project = Project::where('user_id',$id)->where('id',$id_project)->first();
+    	if($data_project){
+    		$data_resource = Resource::where('id',$id_resources)->first();
+    		$data_skema = Skema::where('resource_id',$id_resources)->get();
+    		$data_opsi = Skemaopsi::with('skemaopsigroup')->select('skemaopsigroup_id','name_opsi','value_opsi')->get();
+    		$data_cek = Skema::where('resource_id',$id_resources)->where('type_schema','array')->get();
+    		// return $cek;
     		// return $skema;
-    		return view('user.edit_resource')->with('data_skema',$skema)->with('data_project',$project)->with('data_resource',$resource);
+    		return view('user.edit_resource', compact('data_skema','data_project','data_resource','data_opsi','data_cek'));
     	}
     	
     }
 
     public function new_resource(Request $request, $id, $id_project) {
     	$user = User::where('id',$id)->first();
-    	$project = Project::where('user_id',$id)->where('id',$id_project)->first();
-    	return view('user.new_resource')->with('data_project',$project);
+    	// $project = Project::where('user_id',$id)->where('id',$id_project)->first();
+    	// $opsiskema = Skemaopsi::get();
+    	// $opsigroupnya = Skemaopsigroup::get();
+    	// return view('user.new_resource')->with('data_project',$project)->with('data_opsi', $opsiskema)->with('data_group_opsi', $opsigroupnya);
+    	$data_project = Project::where('user_id',$id)->where('id',$id_project)->first();
+    	$data_opsigroup = Skemaopsigroup::get();
+    	$data_opsi = Skemaopsi::with('skemaopsigroup')->select('skemaopsigroup_id','name_opsi','value_opsi')->get();
+    	
+    	return view('user.new_resource', compact('data_project','data_opsi','data_opsigroup'));
     }
 
     public function add_resource(Request $request) {

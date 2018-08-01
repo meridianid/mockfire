@@ -33,6 +33,8 @@ Route::get('project/{id}/p/{id_project}','ProjectController@detail_project')->mi
 Route::get('project/{id}/p/{id_project}/resource/{id_resource}','ProjectController@edit_resource')->middleware('auth');
 Route::get('project/{id}/p/{id_project}/new_resource','ProjectController@new_resource')->middleware('auth');
 
+Route::get('/load', 'ProjectController@loadData');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

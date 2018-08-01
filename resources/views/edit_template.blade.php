@@ -173,12 +173,18 @@ desired effect
                     var tes = fieldbaru.replace(fieldbaru,'field[field'+no+']');
                     // console.log(tes);
 
-                    $(wrapper).append('<div class="skema"><div class="col-xs-4"><input class="form-control namefield" onkeyup="nospaces(this)" type="text" name="'+tes+'[key]" placeholder="Field Name"></div><div class="col-xs-4"><select class="form-control select2 select_type" name="'+tes+'[value]" style="width: 100%;" id="type"><optgroup label="ADDRESS"><option value="zipCode">Zip code</option><option value="city">City</option><option value="streetAddress">Street address</option><option value="secondaryAddress">Secondary address</option><option value="county">County</option><option value="country">Country</option><option value="state">State</option><option value="stateAbbr">State abbreviated</option><option value="latitude">Latitude</option><option value="longitude">Longitude</option></optgroup><optgroup label="COMMERCE"><option value="color">Color</option><option value="department">Department</option><option value="productName">Product name</option><option value="price">Price</option><option value="productAdjective">Product adjective</option><option value="productMaterial">Product material</option><option value="product">Product</option></optgroup><optgroup label="DATE"><option value="past">Past</option><option value="future">Future</option><option value="recent">Recent</option><option value="month">Month</option><option value="weekday">Weekday</option></optgroup><optgroup label="IMAGE"><option value="image">Image</option><option value="avatar">Avatar</option><option value="dataUri">Data URI</option></optgroup><optgroup label="NAME"><option value="firstName">First name</option><option value="lastName">Last name</option><option value="findName">Full name</option><option value="jobTitle">Job title</option><option value="prefix">Prefix</option><option value="suffix">Suffix</option><option value="title">Title</option><option value="jobDescriptor">Job descriptor</option><option value="jobArea">Job area</option><option value="jobType">Job type</option></optgroup><optgroup label="PHONE"><option value="phoneNumber">Number</option></optgroup><optgroup label="RANDOM"><option value="number">Number</option><option value="uuid">UUID</option><option value="boolean">Boolean</option><option value="word">Word</option><option value="words">Words</option><option value="locale">Locale</option><option value="alphaNumeric">Alpha numeric</option></optgroup><optgroup label="SYSTEM"><option value="fileName">File name</option><option value="commonFileName">Common file name</option><option value="commonFileExt">Common file extension</option><option value="fileType">File type</option><option value="fileExt">File extension</option><option value="semver">Semver</option></optgroup><optgroup label="OBJECT"><option value="coy">Object</option></optgroup><optgroup label="ARRAY"><option value="array">Array</option></optgroup></select></div><p class="add_array"><a href="#" class="remove_field" title="Delete"><i class="fa fa-remove"></i></a></p><div class="col-xs-4"></div><div class="col-md-4 skema2"></div><div class="col-md-4 skema3"></div></div><br>');
+                    $(wrapper).append('<div class="skema"><div class="col-xs-4"><input class="form-control namefield" onkeyup="nospaces(this)" type="text" name="'+tes+'[key]" placeholder="Field Name"></div><div class="col-xs-4"><select class="form-control select2 select_type" name="'+tes+'[value]" style="width: 100%;" id="type">@isset($data_opsi) @foreach($data_opsi as $databaru)<option value="{{ $databaru->name_opsi }}">{{ $databaru->value_opsi }}</option>@endforeach @endisset</select></div><p class="add_array"><a href="#" class="btn btn-danger remove_field" title="Delete"><i class="fa fa-remove"></i></a> </p><div class="col-xs-4"></div><div class="col-md-4 skema2"></div><div class="col-md-4 skema3"></div></div><br>');
 		        }
 		    });
             
             $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
-                e.preventDefault(); $(this).parents('.skema').remove(); a--;
+                e.preventDefault(); $(this).parents('.skema').remove(); a--; //.addClass( "highlight" )
+            })
+            $(wrapper).on("click",".remove_field2", function(e){ //user click on remove text
+            	// var search_field = $(this).parents('.skema').find('.remove_field2').attr('name')
+            	e.preventDefault(); $(this).parents('.skema2')	.addClass( "highlight" ); a--;
+                e.preventDefault(); $(this).parents('.skema').find('.skema2').addClass( "highlight" ); a--; //.addClass( "highlight" )
+                e.preventDefault(); $(this).parents('.skema').find('.skema3').addClass( "highlight" ); a--;
             })
 
             
@@ -195,7 +201,7 @@ desired effect
                             	console.log($(this).parents(".skema").find(".skema_add_field").remove())
                             	console.log($(this).parents(".skema").find(".skema2").empty())
                             	console.log($(this).parents(".skema").find(".skema3").empty())
-                            	console.log("wad")
+                            	// console.log("wad")
                             	// console.log($(this).find(".skema2").remove())
                             	// console.log($(this).parents(".skema3").find(".new_form2").remove())
                             }
@@ -204,7 +210,7 @@ desired effect
         <script type="text/javascript">
         	var x = 1;
 
-        	$(document).on("click",".remove_field2", function(e){ //user click on remove text
+        	$(document).on("click",".remove_field10", function(e){ //user click on remove text
         		 e.preventDefault();
                 $(this).parent('.skema2').find('.new_form').remove();
                 $(this).parent('.skema3').find('.new_form2').remove();
@@ -220,7 +226,7 @@ desired effect
         			x++;
 
         			var search_field = $(this).parents('.skema').find('.select_type').attr('name')
-        			console.log(search_field);
+        			// console.log(search_field);
         			
         			$(this).parents(".skema").find(".skema2").append('<div class="new_form form-group"><input class="get_input form-control" name="'+search_field+'['+isi+'][data][]" onkeyup="nospaces(this)" type="text" placeholder="New Field for '+isi+'"/></div>'); //add input box
         			
@@ -229,7 +235,7 @@ desired effect
        				// CODE BEFORE line 216
        				// $(this).parents(".skema").find(".skema3").append('<div class="new_form2 form-group"><select class="get_input2 form-control select2" name="'+search_field+'['+isi+'][type][]" style="width: 100%;"><option value="TES">TESS</option></select></div>');
 
-       				$(this).parents(".skema").find(".skema3").append('<div class="new_form2 form-group"><select class="form-control select2" name="'+search_field+'['+isi+'][type][]" style="width: 100%;" id="type"><optgroup label="ADDRESS"><option value="zipCode">Zip code</option><option value="city">City</option><option value="streetAddress">Street address</option><option value="secondaryAddress">Secondary address</option><option value="county">County</option><option value="country">Country</option><option value="state">State</option><option value="stateAbbr">State abbreviated</option><option value="latitude">Latitude</option><option value="longitude">Longitude</option></optgroup><optgroup label="COMMERCE"><option value="color">Color</option><option value="department">Department</option><option value="productName">Product name</option><option value="price">Price</option><option value="productAdjective">Product adjective</option><option value="productMaterial">Product material</option><option value="product">Product</option></optgroup><optgroup label="DATE"><option value="past">Past</option><option value="future">Future</option><option value="recent">Recent</option><option value="month">Month</option><option value="weekday">Weekday</option></optgroup><optgroup label="IMAGE"><option value="image">Image</option><option value="avatar">Avatar</option><option value="dataUri">Data URI</option></optgroup><optgroup label="NAME"><option value="firstName">First name</option><option value="lastName">Last name</option><option value="findName">Full name</option><option value="jobTitle">Job title</option><option value="prefix">Prefix</option><option value="suffix">Suffix</option><option value="title">Title</option><option value="jobDescriptor">Job descriptor</option><option value="jobArea">Job area</option><option value="jobType">Job type</option></optgroup><optgroup label="PHONE"><option value="phoneNumber">Number</option></optgroup><optgroup label="RANDOM"><option value="number">Number</option><option value="uuid">UUID</option><option value="boolean">Boolean</option><option value="word">Word</option><option value="words">Words</option><option value="locale">Locale</option><option value="alphaNumeric">Alpha numeric</option></optgroup><optgroup label="SYSTEM"><option value="fileName">File name</option><option value="commonFileName">Common file name</option><option value="commonFileExt">Common file extension</option><option value="fileType">File type</option><option value="fileExt">File extension</option><option value="semver">Semver</option></optgroup><optgroup label="OBJECT"><option value="coy">Object</option></optgroup><optgroup label="ARRAY"><option value="array">Array</option></optgroup></select></div>');
+       				$(this).parents(".skema").find(".skema3").append('<div class="new_form2 form-group"><select class="form-control select2" name="'+search_field+'['+isi+'][type][]" style="width: 100%;" id="type">@isset($data_opsi) @foreach($data_opsi as $databaru)<option value="{{ $databaru->name_opsi }}">{{ $databaru->value_opsi }}</option>@endforeach @endisset</select></div>');
 
         			// $(this).parents(".skema").find(".skema3").append('<div class="new_form2 form-group"><select class="get_input2 form-control select2" name="" style="width: 100%;"><option value="TES">TESS</option></select></div>');
         			// $(this).parents(".skema").find(".skema4").append('<a href="#" class="remove_field2" title="Delete field array"><i class="fa fa-remove"></i></a>');

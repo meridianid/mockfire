@@ -58,11 +58,9 @@
                       	<div class="row daftar-isi">
                       		@php $no = 1; @endphp
 		                      @foreach($data_skema as $data)
-		                      			
 		                      		@if($data->type_schema == 'array')
+		                     			<!-- <br><br><p>ID Skema : {{ $data->id }} Name Skema : {{ $data->name_schema }} | Type : {{ $data->type_schema }} ---  -->
 		                     			<div class="skema">
-		                     				@php $hiha = $data->field; @endphp
-		                     			
 		                     				<div class="col-xs-4">
 		                     					<input type="text" class="form-control namefield" onkeyup="nospaces(this)" name="field[{{ $data->field }}][key]" value="{{ $data->name_schema }}">
 		                     				</div>
@@ -76,37 +74,33 @@
 		                     						>{{ $databaru->value_opsi }}</option>@endforeach @endisset</select>
 		                     					
 		                     				</div>
-		                     					<p class="add_array"><a href="#" class="btn btn-danger remove_field" title="Delete"><i class="fa fa-remove"></i></a> <a class="skema_add_field btn btn-primary" title="Add New Array"><i class="fa fa-plus"></i></a></p>
-		                     				@foreach($data_skema as $data2)	
-			                     				@if($data2->parent_id != '' && $data2->field == $hiha)
-				                     				<div class="col-xs-4"></div>
-				                     				<div class="col-md-4 skema2">
-						                     			<div class="new_form form-group">
-						                     				<input type="text" class="form-control namefield" onkeyup="nospaces(this)" name="field[{{ $data->field }}][value][array][data][]" value="{{ $data2->name_schema }}">
-						                     			</div>	
-						                     	 	</div>
-						                     	 	<div class="col-md-3 skema3">
-						                     			<div class="new_form2 form-group">
-						                     				<!-- <input type="text" class="form-control valuefield" onkeyup="nospaces(this)" name="field[{{ $data2->field }}][value][array][type][]" value="{{ $data2->type_schema }}">	 -->
-						                     				<select class="form-control select2" name="field[{{ $data->field }}][value][array][value][]" style="width: 100%;" id="type">
-						                     				<option value="{{ $data2->type_schema }}">{{ $data2->type_schema }} (Current)</option>
-				                     						@isset($data_opsi) @foreach($data_opsi as $databaru)
-				                     						<option value="{{ $databaru->name_opsi }}">{{ $databaru->value_opsi }}</option>@endforeach @endisset</select>
-						                     			</div>
-						                     		</div>
-						                     		<div class="col-md-1 skema3">
-						                     			<div class="new_form2 form-group">
-						                     				<!-- <input type="text" class="form-control valuefield" onkeyup="nospaces(this)" name="field[{{ $data2->field }}][value][array][type][]" value="{{ $data2->type_schema }}"> -->	
-						                     				<a href="#" class="btn btn-danger remove_field2" title="Delete"><i class="fa fa-remove"></i></a>
-						                     			</div>
-						                     		</div>
-						                     	@endif
-						                     @endforeach
-						                 </div>
-						                 <br>
+		                     					<p class="add_array"><a href="#" class="remove_field" title="Delete"><i class="fa fa-remove"></i></a><a class="skema_add_field btn btn-primary" title="Add New Array"><i class="fa fa-plus"></i></a></p>
+		                     		@elseif($data->parent_id != '')
+		                     			<!-- <ul><li>Name Skema : {{ $data->name_schema }} | Type : {{ $data->type_schema }} | Parent : {{ $data->parent_id }}</li></ul></p> -->
+		                     				<div class="col-xs-4"></div>
+				                     			<div class="col-md-4 skema2">
+				                     				<div class="new_form form-group">
+				                     					<input type="text" class="form-control namefield" onkeyup="nospaces(this)" name="field[{{ $data->field }}][value][array][data][]" value="{{ $data->name_schema }}">
+				                     				</div>	
+				                     	 		</div>
+				                     			<div class="col-md-4 skema3">
+				                     				<div class="new_form2 form-group">
+				                     					<input type="text" class="form-control valuefield" onkeyup="nospaces(this)" name="field[{{ $data->field }}][value][array][type][]" value="{{ $data->type_schema }}">	
+				                     				</div>
+				                     			</div>
+			                     		</div>
+		                     		@else
+		                     			<div class="skema">
+			                     			<div class="col-xs-4">
+			                     				<input type="text" class="form-control namefield" onkeyup="nospaces(this)" name="field[{{ $data->field }}][data]" value="{{ $data->name_schema }}">
+			                     			</div>	
+			                     			<div class="col-xs-4">
+			                     				<input type="text" class="form-control valuefield" name="field[{{ $data->field }}][value]" onkeyup="nospaces(this)" value="{{ $data->type_schema }}">
+			                     			</div>
+			                     			<br><br>
+			                     		</div>
 		                     		@endif
-		                     			
-		                       @endforeach
+		                  	  @endforeach
 		                  	
 	                  	</div>
 	                   </div>                      
