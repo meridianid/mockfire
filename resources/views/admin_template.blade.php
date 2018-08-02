@@ -117,22 +117,6 @@ desired effect
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
-<script>
-  $(document).ready(function () {
-  	//Initialize Select2 Elements
-    $('.select2').select2()
-
-    $('#data').DataTable()
-    $('#table').DataTable({
-      'paging'      : true,
-      'lengthChange': false,
-      'searching'   : true,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : false
-    })
-  })
-</script>
 		
 <script type="text/javascript">
 
@@ -237,5 +221,21 @@ desired effect
         	});
 
         </script>
+<script>
+  $(document).ready(function () {
+  	//Initialize Select2 Elements
+    $('.select2').select2()
+
+    $('#data').DataTable()
+    $('#table').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
+  })
+</script>
 </body>
 </html>

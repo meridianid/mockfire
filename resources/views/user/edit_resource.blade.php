@@ -16,7 +16,7 @@
                 <div class="box-body">
                     <form role="form" method="POST" action="{{action('ProjectController@edit_resource_update')}}">
                       {{ csrf_field() }}
-                      <input type="hidden" name="project_id" value="{{ $data_resource->id }}">
+                      <input type="hidden" name="resource_id" value="{{ $data_resource->id }}">
                         <div class="modal-body">
                           <div class="form-group">
                             <label for="Endpoints">Method</label>
@@ -85,26 +85,43 @@
 						                     				<input type="text" class="form-control namefield" onkeyup="nospaces(this)" name="field[{{ $data->field }}][value][array][data][]" value="{{ $data2->name_schema }}">
 						                     			</div>	
 						                     	 	</div>
-						                     	 	<div class="col-md-3 skema3">
+						                     	 	<div class="col-md-4 skema3">
 						                     			<div class="new_form2 form-group">
 						                     				<!-- <input type="text" class="form-control valuefield" onkeyup="nospaces(this)" name="field[{{ $data2->field }}][value][array][type][]" value="{{ $data2->type_schema }}">	 -->
-						                     				<select class="form-control select2" name="field[{{ $data->field }}][value][array][value][]" style="width: 100%;" id="type">
+						                     				<select class="form-control select2" name="field[{{ $data->field }}][value][array][type][]" style="width: 100%;" id="type">
 						                     				<option value="{{ $data2->type_schema }}">{{ $data2->type_schema }} (Current)</option>
 				                     						@isset($data_opsi) @foreach($data_opsi as $databaru)
 				                     						<option value="{{ $databaru->name_opsi }}">{{ $databaru->value_opsi }}</option>@endforeach @endisset</select>
 						                     			</div>
 						                     		</div>
-						                     		<div class="col-md-1 skema3">
+						                     		<!-- <div class="col-md-1 skema3">
 						                     			<div class="new_form2 form-group">
-						                     				<!-- <input type="text" class="form-control valuefield" onkeyup="nospaces(this)" name="field[{{ $data2->field }}][value][array][type][]" value="{{ $data2->type_schema }}"> -->	
 						                     				<a href="#" class="btn btn-danger remove_field2" title="Delete"><i class="fa fa-remove"></i></a>
 						                     			</div>
-						                     		</div>
+						                     		</div> -->
 						                     	@endif
 						                     @endforeach
 						                 </div>
 						                 <br>
+		                     		@elseif ($data->parent_id == '')
+		                     			<div class="skema">
+		                     				<div class="col-xs-4">
+		                     					<!-- {{ $data->name_schema }} -->
+		                     					<input type="text" class="form-control namefield" onkeyup="nospaces(this)" name="field[{{ $data->field }}][key]" value="{{ $data->name_schema }}">
+		                     				</div>
+		                     				<div class="col-xs-4">
+		                     					<select class="form-control select2 select_type" name="field[{{ $data->field }}][value]" style="width: 100%;" id="type">
+						                     	<option value="{{ $data->type_schema }}">{{ $data->type_schema }} (Current)</option>
+				                     			@isset($data_opsi) @foreach($data_opsi as $databaru)
+				                     			<option value="{{ $databaru->name_opsi }}">{{ $databaru->value_opsi }}</option>@endforeach @endisset</select>
+		                     				</div>
+		                     				<p class="add_array"><a href="#" class="btn btn-danger remove_field" title="Delete"><i class="fa fa-remove"></i></a> </p>
+		                     				<div class="col-xs-4"></div>
+		                     				<div class="col-md-4 skema2"></div>
+		                     				<div class="col-md-4 skema3"></div><br>
+		                     			</div>
 		                     		@endif
+
 		                     			
 		                       @endforeach
 		                  	
@@ -115,7 +132,7 @@
                   
                         </div>
                         <div class="modal-footer">
-                          <button type="submit" class="btn btn-primary">Create</button>
+                          <button type="submit" class="btn btn-primary">Edit</button>
                         </div>
                     </form>
                 </div><!-- /.box-body -->

@@ -167,6 +167,51 @@ class ProjectController extends Controller
 
     public function edit_resource_update(Request $request)
     {
-    	return $request->all();
+    	// return $request->all();
+    	$decode = $request->all();
+
+    	// $field = [];
+    	$coy = time();
+    	$delete = Skema::where('resource_id', $request->resource_id)->delete();
+    	if($delete) {
+	    	foreach ($decode['field'] as $key => $form) {
+	    		// echo $value['key']." ";
+	    		// echo $key;
+	    		$form['key'];
+	    		$form['value'];
+
+	    		if(is_array($form['value'])) {
+	    			$val= 'array';
+	    		}else{
+	    			$val= $form['value'];
+	    		}
+
+	    		// echo $key." ";
+	    		
+	    		
+			        $create_schema = Skema::create([
+			            'resource_id' => $request->resource_id,
+			            'name_schema' => $form['key'],
+			            'type_schema' => $val,
+			            'parent_id' => '',
+			            'field' => $key,
+			        ]);
+
+		    		if(is_array($form['value'])) {
+		    			foreach ($form['value']['array']['data'] as $ki => $value) {
+		    				Skema::create([
+					            'resource_id' => $request->resource_id,
+					            'name_schema' => $value,
+					            'type_schema' => $form['value']['array']['type'][$ki],
+					            'parent_id' => $create_schema->id,
+					            'field' => $key,
+					        ]);
+		    			}
+
+		    		}
+		    	
+
+	    	}
+	    }
     }
 }
