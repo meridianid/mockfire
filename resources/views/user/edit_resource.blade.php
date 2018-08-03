@@ -68,12 +68,12 @@
 		                     				</div>
 		                     				<div class="col-xs-4">
 		                     					<select class="form-control select2 select_type" name="field[{{ $data->field }}][value]" style="width: 100%;" id="type">
+		                     						<option value="{{ $data->type_schema }} selected="selected">{{ $data->type_schema }} (Current)</option>
 		                     						@isset($data_opsi) @foreach($data_opsi as $databaru)
-		                     						<option value="{{ $databaru->name_opsi }}"
-		                     							@if ($databaru->value_opsi == old('field[{{ $data->field }}][value]', $databaru->value_opsi))
-		                     							selected="selected"
-		                     							@endif
-		                     						>{{ $databaru->value_opsi }}</option>@endforeach @endisset</select>
+		                     						<option value="{{ $databaru->name_opsi }}">
+		                     							{{ $databaru->value_opsi }}
+		                     						</option>@endforeach @endisset
+		                     					</select>
 		                     					
 		                     				</div>
 		                     					<p class="add_array"><a href="#" class="btn btn-danger remove_field" title="Delete"><i class="fa fa-remove"></i></a> <a class="skema_add_field btn btn-primary" title="Add New Array"><i class="fa fa-plus"></i></a></p>
@@ -110,15 +110,23 @@
 		                     					<input type="text" class="form-control namefield" onkeyup="nospaces(this)" name="field[{{ $data->field }}][key]" value="{{ $data->name_schema }}">
 		                     				</div>
 		                     				<div class="col-xs-4">
-		                     					<select class="form-control select2 select_type" name="field[{{ $data->field }}][value]" style="width: 100%;" id="type">
-						                     	<option value="{{ $data->type_schema }}">{{ $data->type_schema }} (Current)</option>
-				                     			@isset($data_opsi) @foreach($data_opsi as $databaru)
-				                     			<option value="{{ $databaru->name_opsi }}">{{ $databaru->value_opsi }}</option>@endforeach @endisset</select>
+		                     					@if($data->type_schema == 'ObjectID')
+		                     						@php $disabled = "disabled" @endphp
+		                     						<input type="hidden" name="field[{{ $data->field }}][value]" value="{{ $data->type_schema }}">
+		                     					@else
+		                     						@php $disabled = "" @endphp
+		                     					@endif
+			                     					<select class="form-control select2 select_type" name="field[{{ $data->field }}][value]" style="width: 100%;" id="type" {{ $disabled }}>
+							                     	<option value="{{ $data->type_schema }}">{{ $data->type_schema }} (Current)</option>
+					                     			@isset($data_opsi) @foreach($data_opsi as $databaru)
+					                     			<option value="{{ $databaru->name_opsi }}">{{ $databaru->value_opsi }}</option>@endforeach @endisset</select>
 		                     				</div>
-		                     				<p class="add_array"><a href="#" class="btn btn-danger remove_field" title="Delete"><i class="fa fa-remove"></i></a> </p>
+		                     				@if($data->type_schema != 'ObjectID')		                     				
+		                     					<p class="add_array"><a href="#" class="btn btn-danger remove_field" title="Delete"><i class="fa fa-remove"></i></a> </p>
+		                     				@endif
 		                     				<div class="col-xs-4"></div>
 		                     				<div class="col-md-4 skema2"></div>
-		                     				<div class="col-md-4 skema3"></div><br>
+		                     				<div class="col-md-4 skema3"></div><br><br>
 		                     			</div>
 		                     		@endif
 

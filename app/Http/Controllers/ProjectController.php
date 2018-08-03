@@ -10,7 +10,7 @@ use App\Skema;
 use App\Skemaopsi;
 use App\Skemaopsigroup;
 use Faker\Factory as Faker;
-
+use File;
 use Storage;
 
 class ProjectController extends Controller
@@ -37,6 +37,8 @@ class ProjectController extends Controller
             'name_project' => $name_project,
             'endpoint' => $rand_str,
         ]);
+        $simpan = public_path().'/users/project/'.$rand_str;
+        File::makeDirectory($simpan);
 
         // $create_directory = Storage::MakeDirectory(public_path($rand_str));
 
@@ -149,22 +151,6 @@ class ProjectController extends Controller
     	}
     }
 
-    public function generate_data(Request $request)
-    {
-    	// return $request->all();
-
-    	$data = Skema::where('resource_id',$request->resource_id)->with('child')->get();
-    	// return $data;
-    	$faker = Faker::create();
-    	foreach ($data as $key) {
-    		foreach($key->child as $value) {
-    			$d = $value->type_schema;
-    			echo "<p>".$value->name_schema." : ".$faker->$d."</p>";
-
-    		}
-    	}
-    }
-
     public function edit_resource_update(Request $request)
     {
     	// return $request->all();
@@ -213,5 +199,46 @@ class ProjectController extends Controller
 
 	    	}
 	    }
+    }
+
+    public function generate_data(Request $request)
+    {
+    	// return $request->all();
+    	$data = Skema::where('resource_id',$request->resource_id)->where('parent_id','')->with('child')->select('id','name_schema','type_schema','parent_id','field')->get();
+
+    	$faker = Faker::create();
+    	$no = 1;
+
+    	$ha = array();
+    	
+    	foreach ($data as $key) {
+    		$d = $key->type_schema;
+    		// $ha[] = ;
+		
+	    		if($key->type_schema == 'array'){
+	    			// echo "<p>".$key->name_schema;
+	    			$oy = array();
+		    		foreach($key->child as $hi){
+		    			$f = $hi->type_schema;	
+		    			// echo "<li>".$hi->name_schema." : ".$faker->$f."</li></p>";
+		    			$oy[$hi->name_schema] = $faker->$f;
+		    		}    
+		    		$ha[$key->name_schema] = $oy;
+	    		}else if($key->type_schema == 'ObjectID'){
+	    			$ha[$key->name_schema] = rand(1,9999);
+	    		}else{
+	    			$ha[$key->name_schema] = $faker->$d;
+	    		}
+    	}
+    	$di_encode = json_encode($ha);
+    	// Storage::putFile('public/users/project'.$request->resource_id.','.$di_encode);
+    	$file = '.json';
+	    $destinationPath=public_path()."/users/project/$request->endpoint";
+	    if (!is_dir($destinationPath)) {
+	    	mkdir($destinationPath,0777,true);  
+	  	}
+	  	// Storage::disk('public_data')->put($destinationPath$file, $di_encode);
+	    File::put($destinationPath.$file,$di_encode);
+    	echo $di_encode;
     }
 }

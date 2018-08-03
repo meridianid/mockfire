@@ -26,6 +26,7 @@
                             <form class="form-horizontal" method="POST" action="{{action('ProjectController@generate_data')}}">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="resource_id" value="{{ $data->id }}">
+                                <input type="hidden" name="endpoint" value="{{ $data_project->endpoint }}">
                                 <button type="submit" class="btn btn-primary">Generate Data for <strong>{{ $data->name_resource }}</strong></button>
                             </form>
                         </p>
