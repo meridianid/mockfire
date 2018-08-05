@@ -55,7 +55,7 @@ return [
             'visibility' => 'public',
         ],
 
-        'public_data' => [
+        'resource' => [
             'driver' => 'local',
             'root' => storage_path('app/public/users/project'),
             'url' => env('APP_URL').'/data_json',

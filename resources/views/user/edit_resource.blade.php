@@ -68,7 +68,7 @@
 		                     				</div>
 		                     				<div class="col-xs-4">
 		                     					<select class="form-control select2 select_type" name="field[{{ $data->field }}][value]" style="width: 100%;" id="type">
-		                     						<option value="{{ $data->type_schema }} selected="selected">{{ $data->type_schema }} (Current)</option>
+		                     						<option value="{{ $data->type_schema }}" selected="selected">{{ $data->type_schema }} (Current)</option>
 		                     						@isset($data_opsi) @foreach($data_opsi as $databaru)
 		                     						<option value="{{ $databaru->name_opsi }}">
 		                     							{{ $databaru->value_opsi }}

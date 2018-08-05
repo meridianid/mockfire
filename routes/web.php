@@ -32,6 +32,7 @@ Route::get('project/{id}','ProjectController@get_project')->middleware('auth');
 Route::get('project/{id}/p/{id_project}','ProjectController@detail_project')->middleware('auth');
 Route::get('project/{id}/p/{id_project}/resource/{id_resource}','ProjectController@edit_resource')->middleware('auth');
 Route::get('project/{id}/p/{id_project}/new_resource','ProjectController@new_resource')->middleware('auth');
+Route::get('/{endpoint}/{id_resource}', 'ProjectController@show_json');
 
 Route::get('/load', 'ProjectController@loadData');
 

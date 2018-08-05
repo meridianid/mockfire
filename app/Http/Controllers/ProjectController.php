@@ -12,6 +12,7 @@ use App\Skemaopsigroup;
 use Faker\Factory as Faker;
 use File;
 use Storage;
+use Exception;
 
 class ProjectController extends Controller
 {
@@ -233,12 +234,40 @@ class ProjectController extends Controller
     	$di_encode = json_encode($ha);
     	// Storage::putFile('public/users/project'.$request->resource_id.','.$di_encode);
     	$file = '.json';
-	    $destinationPath=public_path()."/users/project/$request->endpoint";
-	    if (!is_dir($destinationPath)) {
-	    	mkdir($destinationPath,0777,true);  
-	  	}
+	    $destinationPath=public_path('/users/project/'.$request->endpoint.'')."/$request->resource_id";
+	   //  if (!is_dir($destinationPath)) {
+	   //  	mkdir($destinationPath,0777,true);  
+	  	// }
 	  	// Storage::disk('public_data')->put($destinationPath$file, $di_encode);
 	    File::put($destinationPath.$file,$di_encode);
     	echo $di_encode;
+    }
+
+    public function show_json(Request $request, $endpoint, $id_resource)
+    {
+        // $path = public_path()."/users/project/".$endpoint."/".$id_resource.".json";
+        // echo Storage::disk('resource')->get($id_resource.'.json', $path);
+        try {
+            $path = public_path() . "/users/project/$endpoint/$id_resource.json"; // ie: /var/www/laravel/app/storage/json/filename.json
+            // if (!File::exists($path)) {
+            //     // throw new Exception("Invalid File");
+            //     $data = array(
+            //         'status' => 404,
+            //         'message' => "File not found!"
+            //     );
+            //     return json_encode($data);
+            // }
+
+            $file = File::get($path); // string
+            return $file;
+        } catch(Exception $e) {
+            $data = array(
+                    'status' => 404,
+                    'message' => "File not found!"
+                    // 'message' => $e->getMessage()
+                );
+            return json_encode($data);
+            $this->set_response($data, REST_Controller::HTTP_INTERNAL_SERVER_ERROR );
+        }
     }
 }
