@@ -32,7 +32,13 @@ Route::get('project/{id}','ProjectController@get_project')->middleware('auth');
 Route::get('project/{id}/p/{id_project}','ProjectController@detail_project')->middleware('auth');
 Route::get('project/{id}/p/{id_project}/resource/{id_resource}','ProjectController@edit_resource')->middleware('auth');
 Route::get('project/{id}/p/{id_project}/new_resource','ProjectController@new_resource')->middleware('auth');
-Route::get('/{endpoint}/{id_resource}', 'ProjectController@show_json');
+Route::get('/show/{endpoint}/{id_resource}', 'ProjectController@show_json');
+Route::post('/delete_resource','ProjectController@delete_resource')->middleware('auth');
+
+//Administrator
+Route::get('/admin/projects','AdminController@project_show')->middleware('auth');
+Route::post('/delete_project','AdminController@delete_project')->middleware('auth');
+Route::get('/admin/projects/{id_project}','AdminController@resource_show')->middleware('auth');
 
 Route::get('/load', 'ProjectController@loadData');
 

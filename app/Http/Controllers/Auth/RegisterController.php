@@ -69,6 +69,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'role' => 'User',
         ]);
 
         Mail::to($data['email'])->send(new WelcomeEmail($user));

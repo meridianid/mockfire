@@ -4,5 +4,5 @@
       v4
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2017-{{ date('Y') }} <a href="https://LENGKOMEDIA.com">Lengkomedia</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2017-{{ date('Y') }} <a href="https://LENGKOMEDIA.com">Lengkomedia</a> Made with <i class="fa fa-heart faa-pulse animated" style="color:#f24141;"></i> di Bandung.</strong> All rights reserved.
   </footer>

@@ -22,7 +22,7 @@
                             <label for="ResourceName">Resource Name</label>
                             <p>Enter meaningful resource name, it will be used to generate RESTful API URLs</p>
                             <p>EXAMPLE: users, comments, articles </p>
-                            <input type="text" class="form-control" id="resourcename" name="resource_name" onkeyup="nospaces(this)" placeholder="Enter Resource Name">
+                            <input type="text" class="form-control" id="resourcename" name="resource_name" onkeyup="nospaces(this)" placeholder="Enter Resource Name" required>
                           </div>
 
                           <div class="form-group">
@@ -73,7 +73,7 @@
                       
 
                           <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-                  
+                          <input type="hidden" name="ud" value="{{ Auth::user()->id }}">                  
                         </div>
                         <div class="modal-footer">
                           <button type="submit" class="btn btn-primary">Create</button>

@@ -150,6 +150,7 @@ class ProjectController extends Controller
     		}
 
     	}
+        return redirect("/project/$request->ud/p/$request->project_id")->with('success','new resource created !');
     }
 
     public function edit_resource_update(Request $request)
@@ -231,8 +232,7 @@ class ProjectController extends Controller
 	    			$ha[$key->name_schema] = $faker->$d;
 	    		}
     	}
-    	$di_encode = json_encode($ha);
-    	// Storage::putFile('public/users/project'.$request->resource_id.','.$di_encode);
+    	$di_encode = json_encode(array($ha));
     	$file = '.json';
 	    $destinationPath=public_path('/users/project/'.$request->endpoint.'')."/$request->resource_id";
 	   //  if (!is_dir($destinationPath)) {
@@ -240,15 +240,14 @@ class ProjectController extends Controller
 	  	// }
 	  	// Storage::disk('public_data')->put($destinationPath$file, $di_encode);
 	    File::put($destinationPath.$file,$di_encode);
-    	echo $di_encode;
+    	// echo $di_encode;
+        return redirect("/project/$request->ud/p/$request->pid")->with('success','the resource has generated, for check please click the name of your resource !');
     }
 
     public function show_json(Request $request, $endpoint, $id_resource)
     {
-        // $path = public_path()."/users/project/".$endpoint."/".$id_resource.".json";
-        // echo Storage::disk('resource')->get($id_resource.'.json', $path);
         try {
-            $path = public_path() . "/users/project/$endpoint/$id_resource.json"; // ie: /var/www/laravel/app/storage/json/filename.json
+            $path = public_path() . "/users/project/$endpoint/$id_resource.json"; // ie: /var/www/laravel/public/users/project/folderendpoint/filename.json
             // if (!File::exists($path)) {
             //     // throw new Exception("Invalid File");
             //     $data = array(
@@ -269,5 +268,15 @@ class ProjectController extends Controller
             return json_encode($data);
             $this->set_response($data, REST_Controller::HTTP_INTERNAL_SERVER_ERROR );
         }
+    }
+
+    public function delete_resource(Request $request)
+    {
+        // return $request->all();
+
+        Skema::where('resource_id',$request->resource_id)->delete();
+        Resource::where('id',$request->resource_id)->delete();
+
+        return redirect("/project/$request->ud/p/$request->pid")->with('success','the resource deleted !');
     }
 }

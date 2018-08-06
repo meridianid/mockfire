@@ -16,10 +16,11 @@ class CreateTableSchema extends Migration
         Schema::create('skema', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('resource_id')->unsigned();
-            $table->foreign('resource_id')->references('id')->on('resources');
+            $table->foreign('resource_id')->references('id')->on('resources')->onDelete('cascade');
             $table->string('name_schema');
             $table->string('type_schema');
             $table->string('parent_id'); //Misal punya induk dari id schema, masuk nya di parent id
+            $table->string('field');
             $table->timestamps();
         });
     }
