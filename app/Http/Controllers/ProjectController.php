@@ -110,6 +110,7 @@ class ProjectController extends Controller
     	$coy = time();
 
     	$create_resource = Resource::create([
+                'id' => $coy,
 	            'project_id' => $request->project_id,
 	            'name_resource' => $request->resource_name,
 	            'type' => $request->method,
@@ -211,28 +212,32 @@ class ProjectController extends Controller
     	$faker = Faker::create();
     	$no = 1;
 
-    	$ha = array();
-    	
-    	foreach ($data as $key) {
-    		$d = $key->type_schema;
-    		// $ha[] = ;
-		
-	    		if($key->type_schema == 'array'){
-	    			// echo "<p>".$key->name_schema;
-	    			$oy = array();
-		    		foreach($key->child as $hi){
-		    			$f = $hi->type_schema;	
-		    			// echo "<li>".$hi->name_schema." : ".$faker->$f."</li></p>";
-		    			$oy[$hi->name_schema] = $faker->$f;
-		    		}    
-		    		$ha[$key->name_schema] = $oy;
-	    		}else if($key->type_schema == 'ObjectID'){
-	    			$ha[$key->name_schema] = rand(1,9999);
-	    		}else{
-	    			$ha[$key->name_schema] = $faker->$d;
-	    		}
-    	}
-    	$di_encode = json_encode(array($ha));
+        $resouc = [];
+        for ($i=1; $i < 11; $i++) { 
+            # code...
+        	$ha = array();
+        	foreach ($data as $key) {
+        		$d = $key->type_schema;
+        		// $ha[] = ;
+    		
+    	    		if($key->type_schema == 'array'){
+    	    			// echo "<p>".$key->name_schema;
+    	    			$oy = array();
+    		    		foreach($key->child as $hi){
+    		    			$f = $hi->type_schema;	
+    		    			// echo "<li>".$hi->name_schema." : ".$faker->$f."</li></p>";
+    		    			$oy[$hi->name_schema] = $faker->$f;
+    		    		}    
+    		    		$ha[$key->name_schema] = $oy;
+    	    		}else if($key->type_schema == 'ObjectID'){
+    	    			$ha[$key->name_schema] = $i;
+    	    		}else{
+    	    			$ha[$key->name_schema] = $faker->$d;
+    	    		}
+        	}
+            array_push($resouc, $ha);
+        }
+    	$di_encode = json_encode($resouc);
     	$file = '.json';
 	    $destinationPath=public_path('/users/project/'.$request->endpoint.'')."/$request->resource_id";
 	   //  if (!is_dir($destinationPath)) {
@@ -246,6 +251,8 @@ class ProjectController extends Controller
 
     public function show_json(Request $request, $endpoint, $id_resource)
     {
+
+        // return $request->search;
         try {
             $path = public_path() . "/users/project/$endpoint/$id_resource.json"; // ie: /var/www/laravel/public/users/project/folderendpoint/filename.json
             // if (!File::exists($path)) {
@@ -258,7 +265,15 @@ class ProjectController extends Controller
             // }
 
             $file = File::get($path); // string
-            return $file;
+            if($request->id) {
+               $datas = json_decode($file, true);
+               $datas = array_filter($datas);
+
+               return $datas = collect($data)->where("id","LIKE","%$request->id%")->all();
+
+            } else {
+                return $file;
+            }
         } catch(Exception $e) {
             $data = array(
                     'status' => 404,
