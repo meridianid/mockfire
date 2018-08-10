@@ -14,8 +14,8 @@
                     </div>
                 </div>
                 <div class="box-body">
-                    <code><strong>{{ url('/') }}/api/</strong>:endpoint<strong>/posts</strong></code><br>
-                    If you want use <strong>GET</strong> by <strong>ID</strong> use this ; <li class="fa fa-hand-o-right"><code>{{ url('/') }}/api/:endpoint/posts<strong>/1</strong></code><i class="fa fa-hand-o-left"></i></li>
+                    <pre><strong>{{ url('/') }}/api/</strong>:endpoint<strong>/posts</strong></pre><br>
+                    If you want use <strong>GET</strong> by <strong>ID</strong> use this ; <pre>{{ url('/') }}/api/:endpoint/posts<strong>/1</strong></pre>
                     <br>
                         <a href="/project/{{ Auth::user()->id }}/p/{{ $data_project->id }}/new_resource" class="btn btn-primary">New Resource</a>
                         <br /><br />
