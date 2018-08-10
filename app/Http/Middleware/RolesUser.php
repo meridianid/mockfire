@@ -18,9 +18,9 @@ class RolesUser
     {
         if (Auth::check()) {
             $user = Auth::user();
-            if ($user->roles == 'Administrator') {
+            if ($user->role == 'Administrator') {
                 // return redirect('admin/dashboard');
-            } elseif ($user->level == 'User') {
+            } elseif ($user->role == 'User') {
                 return redirect('/');
             }
         }

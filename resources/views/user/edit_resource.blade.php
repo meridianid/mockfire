@@ -136,8 +136,9 @@
 	                  	</div>
 	                   </div>                      
 
-                          <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-                  
+                        <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
+                  		<input type="hidden" name="ud" value="{{ Auth::user()->id }}"/>
+                  		<input type="hidden" name="project_id" value="{{ $data_project->id }}">
                         </div>
                         <div class="modal-footer">
                           <button type="submit" class="btn btn-primary">Edit</button>

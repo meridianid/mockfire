@@ -7,8 +7,6 @@
                 <div class="box-header with-border">
                    <h3 class="box-title">Data Resource Project</h3>
                     <div class="box-tools pull-right">
-                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
-                        <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
                     </div>
                 </div>
             </div>
@@ -16,7 +14,7 @@
             @foreach ($data_resource as $data)
                 <div class='col-md-3'>
                     <div class="box box-primary">
-                        <div class="box-header with-border">
+                        <div class="box-header">
                             <h3 class="box-title">Resource <strong><a>{{ $data->name_resource }}</a></strong></h3>
                             <div class="box-tools pull-right">
                                 <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>

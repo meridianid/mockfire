@@ -1,0 +1,32 @@
+{
+    "posts" :[
+      {
+        "id": 1,
+        "Name": {
+          "FirstName": "Brendon",
+          "LastName": "Bode",
+          "FullName": "Ms. Francesca Stoltenberg Jr."
+        },
+        "Address": {
+          "Address1": "1875 Rohan Springs",
+          "Address2": "Apt. 661",
+          "ZipCode": "78489"
+        },
+        "Phone": "(589) 535-3874 x7291"
+      },
+      {
+        "id": 2,
+        "Name": {
+          "FirstName": "Krystina",
+          "LastName": "Simonis",
+          "FullName": "Rogers Huel"
+        },
+        "Address": {
+          "Address1": "8112 Frida Street Suite 822",
+          "Address2": "Suite 324",
+          "ZipCode": "99985"
+        },
+        "Phone": "1-865-941-5024"
+      }
+    ]
+}

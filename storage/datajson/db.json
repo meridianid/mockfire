@@ -1,0 +1,21 @@
+{
+    "posts": [
+        {
+            "id": 1,
+            "title": "json-server",
+            "author": "is db"
+        },
+        {
+            "id": 2,
+            "title": "json-server",
+            "author": "is db"
+        }
+    ],
+    "comments": [
+        {
+            "id": 1,
+            "body": "some comment",
+            "post_id": 1
+        }
+    ]
+}

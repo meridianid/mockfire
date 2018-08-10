@@ -32,13 +32,19 @@ Route::get('project/{id}','ProjectController@get_project')->middleware('auth');
 Route::get('project/{id}/p/{id_project}','ProjectController@detail_project')->middleware('auth');
 Route::get('project/{id}/p/{id_project}/resource/{id_resource}','ProjectController@edit_resource')->middleware('auth');
 Route::get('project/{id}/p/{id_project}/new_resource','ProjectController@new_resource')->middleware('auth');
-Route::get('/show/{endpoint}/{id_resource}', 'ProjectController@show_json');
+// Route::get('/show/{all}', 'ProjectController@show_json')->where('all', '.*');
+Route::any('api/{db}/{all}', "ProjectController@handleRequest")->where('all', '.*');
 Route::post('/delete_resource','ProjectController@delete_resource')->middleware('auth');
 
 //Administrator
-Route::get('/admin/projects','AdminController@project_show')->middleware('auth');
-Route::post('/delete_project','AdminController@delete_project')->middleware('auth');
-Route::get('/admin/projects/{id_project}','AdminController@resource_show')->middleware('auth');
+Route::get('/admin/users', 'AdminController@user_show')->middleware('auth','rolesuser');
+Route::post('/delete_user','AdminController@delete_user')->middleware('auth','rolesuser');
+Route::get('/admin/projects','AdminController@project_show')->middleware('auth','rolesuser');
+Route::post('/delete_project','AdminController@delete_project')->middleware('auth','rolesuser');
+Route::get('/admin/projects/{id_project}','AdminController@resource_show')->middleware('auth','rolesuser');
+
+
+
 
 Route::get('/load', 'ProjectController@loadData');
 

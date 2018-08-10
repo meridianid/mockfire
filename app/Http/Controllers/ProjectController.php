@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+// use Request;
+use Response;
+use Config;
+use App\Jsonserver\JsonServer;
 use App\Project;
 use App\User;
 use App\Resource;
@@ -198,10 +202,9 @@ class ProjectController extends Controller
 		    			}
 
 		    		}
-		    	
-
 	    	}
 	    }
+        return redirect("/project/$request->ud/p/$request->project_id")->with('success','the resource updated !');
     }
 
     public function generate_data(Request $request)
@@ -237,9 +240,12 @@ class ProjectController extends Controller
         	}
             array_push($resouc, $ha);
         }
-    	$di_encode = json_encode($resouc);
+    	$di_encode = json_encode(['posts' => $resouc]);
+        // return response()->json(['result'=>true,'data'=>'success make order'],200);
+        // return $di_encode;
     	$file = '.json';
-	    $destinationPath=public_path('/users/project/'.$request->endpoint.'')."/$request->resource_id";
+	    // $destinationPath=public_path('/users/project/'.$request->endpoint.'')."/$request->nrs";
+        $destinationPath=storage_path('/datajson')."/$request->nrs";
 	   //  if (!is_dir($destinationPath)) {
 	   //  	mkdir($destinationPath,0777,true);  
 	  	// }
@@ -249,40 +255,52 @@ class ProjectController extends Controller
         return redirect("/project/$request->ud/p/$request->pid")->with('success','the resource has generated, for check please click the name of your resource !');
     }
 
-    public function show_json(Request $request, $endpoint, $id_resource)
+    # DO NOT USE , THIS FUNCTION NOT FIX
+    public function show_json(Request $request, $uri) //$endpoint, $name_resource //$uri
     {
-
+        // return $uri;
+        $params = explode('/', $uri);
+        $endpoint = $params[0];
+        $name_resource = $params[1];
+        // $search = $params[2];
+        // return $params[2];
         // return $request->search;
-        try {
-            $path = public_path() . "/users/project/$endpoint/$id_resource.json"; // ie: /var/www/laravel/public/users/project/folderendpoint/filename.json
-            // if (!File::exists($path)) {
-            //     // throw new Exception("Invalid File");
-            //     $data = array(
-            //         'status' => 404,
-            //         'message' => "File not found!"
-            //     );
-            //     return json_encode($data);
-            // }
-
-            $file = File::get($path); // string
-            if($request->id) {
-               $datas = json_decode($file, true);
-               $datas = array_filter($datas);
-
-               return $datas = collect($data)->where("id","LIKE","%$request->id%")->all();
-
-            } else {
-                return $file;
-            }
-        } catch(Exception $e) {
-            $data = array(
+        // try {
+            // $path = public_path() . "/users/project/$endpoint/$name_resource.json"; // ie: /var/www/laravel/public/users/project/folderendpoint/filename.json
+            $path = storage_path('/datajson')."$name_resource.json";
+            if (!File::exists($path)) {
+                // throw new Exception("Invalid File");
+                $data = array(
                     'status' => 404,
                     'message' => "File not found!"
-                    // 'message' => $e->getMessage()
                 );
-            return json_encode($data);
-            $this->set_response($data, REST_Controller::HTTP_INTERNAL_SERVER_ERROR );
-        }
+                return json_encode($data);
+            }else {
+                $file = File::get($path); // string
+                if(isset($params[2])) {
+                    // return "haylloo";
+                    $hay = json_decode($file, true);
+                    // return "haylloo";
+                   foreach($hay as $row){
+                        if($row['id'] == $params[2]){
+                            // echo '<pre>';
+                            // print_r($row);
+                            return json_encode(array($row));
+                        }
+                    }
+                } else {
+                    return $file;
+                }
+            }
+        // } catch(Exception $e) {
+        //     $data = array(
+        //             'status' => 404,
+        //             'message' => "File not found!"
+        //             // 'message' => $e->getMessage()
+        //         );
+        //     return json_encode($data);
+        //     $this->set_response($data, REST_Controller::HTTP_INTERNAL_SERVER_ERROR );
+        // }
     }
 
     public function delete_resource(Request $request)
@@ -293,5 +311,21 @@ class ProjectController extends Controller
         Resource::where('id',$request->resource_id)->delete();
 
         return redirect("/project/$request->ud/p/$request->pid")->with('success','the resource deleted !');
+    }
+
+    public function handleRequest(Request $request, $db, $uri)
+    {
+        $data = $request->all();                                            
+        $method = $request->method();  
+        $pathToJson = storage_path('/datajson/'.$db .'.json'); //if your path in inside storage folder of laravel
+        Config::set('jsonserver.pathToDb', $pathToJson); //here we set db
+
+        // return Config::get('pathToDb');
+        // return config('jsonserver.pathToDb');
+
+        $jsonServer = new JsonServer();                                     
+        $response = $jsonServer->handleRequest($method, $uri, $data);       
+
+        $response->send();     
     }
 }

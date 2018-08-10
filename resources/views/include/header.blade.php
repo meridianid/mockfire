@@ -32,8 +32,8 @@
                 <img src="{{ asset("/bower_components/admin-lte/dist/img/user2-160x160.jpg") }}" class="img-circle" alt="User Image">
 
                 <p>
-                  {{ Auth::user()->name }} -
-                  <small>Balance <strong>s</strong></small>
+                  {{ Auth::user()->name }}
+                  <small><strong>{{ Auth::user()->role }}</strong> - LENGKOMEDIA</small>
                 </p>
               </li>
               <!-- Menu Footer-->

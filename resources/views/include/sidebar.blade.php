@@ -34,6 +34,10 @@
             <ul class="treeview-menu">
               <li class="{{ Request::segment(2) === 'projects' ? 'active' : null }}">
                 <a href="{{ url('admin/projects') }}"><i class="fa fa-book"></i> <span>Projects Control</span></a>
+              </li>
+              <li class="{{ Request::segment(2) === 'users' ? 'active' : null }}">
+                <a href="{{ url('admin/users') }}"><i class="fa fa-users"></i> <span>Users Control</span></a>
+              </li>
             </ul>
           </li>
         @endif

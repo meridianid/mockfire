@@ -173,7 +173,7 @@ desired effect
                     var tes = fieldbaru.replace(fieldbaru,'field[field'+no+']');
                     // console.log(tes);
 
-                    $(wrapper).append('<div class="skema"><div class="col-xs-4"><input class="form-control namefield" onkeyup="nospaces(this)" type="text" name="'+tes+'[key]" placeholder="Field Name"></div><div class="col-xs-4"><select class="form-control select2 select_type" name="'+tes+'[value]" style="width: 100%;" id="type">@isset($data_opsi) @foreach($data_opsi as $databaru)<option value="{{ $databaru->name_opsi }}">{{ $databaru->value_opsi }}</option>@endforeach @endisset</select></div><p class="add_array"><a href="#" class="btn btn-danger remove_field" title="Delete"><i class="fa fa-remove"></i></a> </p><div class="col-xs-4"></div><div class="col-md-4 skema2"></div><div class="col-md-4 skema3"></div></div><br>');
+                    $(wrapper).append('<div class="skema"><div class="col-xs-4"><input class="form-control namefield" onkeyup="nospaces(this)" type="text" name="'+tes+'[key]" placeholder="Field Name" required></div><div class="col-xs-4"><select class="form-control select2 select_type" name="'+tes+'[value]" style="width: 100%;" id="type">@isset($data_opsi) @foreach($data_opsi as $databaru)<option value="{{ $databaru->name_opsi }}">{{ $databaru->value_opsi }}</option>@endforeach @endisset</select></div><p class="add_array"><a href="#" class="btn btn-danger remove_field" title="Delete"><i class="fa fa-remove"></i></a> </p><div class="col-xs-4"></div><div class="col-md-4 skema2"></div><div class="col-md-4 skema3"></div></div><br>');
 		        }
 		    });
             
@@ -228,7 +228,7 @@ desired effect
         			var search_field = $(this).parents('.skema').find('.select_type').attr('name')
         			// console.log(search_field);
         			
-        			$(this).parents(".skema").find(".skema2").last().append('<div class="new_form form-group"><input class="get_input form-control" name="'+search_field+'['+isi+'][data][]" onkeyup="nospaces(this)" type="text" placeholder="New Field for '+isi+'"/></div>'); //add input box
+        			$(this).parents(".skema").find(".skema2").last().append('<div class="new_form form-group"><input class="get_input form-control" name="'+search_field+'['+isi+'][data][]" onkeyup="nospaces(this)" type="text" placeholder="New Field for '+isi+'" required="required"/></div>'); //add input box
         			
         			// $(this).parents(".skema").find(".skema2").append('<div class="new_form form-group"><input class="form-control" name="field2['+isi+'][key]" type="text" placeholder="Input new field '+isi+'"/></div>');
 

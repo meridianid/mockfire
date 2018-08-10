@@ -28,7 +28,7 @@
                    Your Project
                    <div class="box">
                    		@foreach($data_project as $data)
-                   			<a href="{{ Auth::user()->id }}/p/{{ $data->id }}" class="btn btn-default btn-block">{{ $data->name_project }}</a>
+                   			<p><a href="{{ Auth::user()->id }}/p/{{ $data->id }}" class="btn btn-default btn-block">{{ $data->name_project }}</a></p>
                    		@endforeach
                    </div>
                 </div><!-- /.box-footer-->

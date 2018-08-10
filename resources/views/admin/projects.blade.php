@@ -3,7 +3,7 @@
 @section('content')
     <div class='row'>
         <div class="col-xs-12">
-          @if (Session::has('success'))
+            @if (Session::has('success'))
                 <div class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <h4><i class="icon fa fa-check"></i> Success!</h4>
