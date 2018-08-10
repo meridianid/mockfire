@@ -14,6 +14,7 @@ use App\Skema;
 use App\Skemaopsi;
 use App\Skemaopsigroup;
 use Faker\Factory as Faker;
+// use Faker\Provider\id_ID\Person as Fakk;
 use File;
 use Storage;
 use Exception;
@@ -215,6 +216,7 @@ class ProjectController extends Controller
     	$faker = Faker::create();
     	$no = 1;
 
+        // return $faker->nik();
         $resouc = [];
         for ($i=1; $i < 11; $i++) { 
             # code...

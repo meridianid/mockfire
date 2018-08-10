@@ -14,15 +14,13 @@
                 </div>
                 <div class="box-body">
                     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                        <!--<ol class="carousel-indicators">-->
-                        <!--    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>-->
-                        <!--    <li data-target="#carousel-example-generic" data-slide-to="1"></li>-->
-                        <!--    <li data-target="#carousel-example-generic" data-slide-to="2"></li>-->
-                        <!--    <li data-target="#carousel-example-generic" data-slide-to="3"></li>-->
-                        <!--</ol>-->
+                        <!-- <ol class="carousel-indicators">
+                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                        </ol> -->
                         <div class="carousel-inner" role="listbox">
-                            <div class="item active"><img src="https://www.larakostpulsa.com/img/slider/slider4.png" width="100%"></div>
-                            <div class="item"><img src="https://www.larakostpulsa.com/img/slider/slider6.png" width="100%"></div>
+                            <div class="item active"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy_abYxeAQllz-qCThucRW3tJQ05099Wp_Y-3Z5ipscAMBsj6Pkg" width="100%"></div>
+                            <div class="item"><img src="https://1.bp.blogspot.com/-x-PX22iYjhc/W0hLIK7Z9OI/AAAAAAAAFTM/iQnYnTeTcp8wRyYYJwVs2CzIPdhBFjDswCLcBGAs/s1600/LogoAsianGames.png" width="100%"></div>
                         </div>
                     </div>
                 </div><!-- /.box-body -->

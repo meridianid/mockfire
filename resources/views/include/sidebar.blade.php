@@ -46,12 +46,8 @@
           <a href="{{ url('project/'.Auth::user()->id.'') }}"><i class="fa fa-gears"></i> <span>Project</span></a>
         </li>
 
-        <li class="{{ Request::segment(1) === 'callour' ? 'active' : null }}">
-          <a href="{{ url('callour') }}"><i class="fa fa-comments-o"></i> <span>Help</span></a>
-        </li>
-
-        <li class="{{ Request::segment(1) === 'tos' ? 'active' : null }}">
-          <a href="{{ url('tos') }}"><i class="fa fa-info-circle"></i> <span>Term of Service</span></a>
+        <li class="{{ Request::segment(1) === 'help' ? 'active' : null }}">
+          <a href="{{ url('help') }}"><i class="fa fa-graduation-cap"></i> <span>Help</span></a>
         </li>
 
         <li>

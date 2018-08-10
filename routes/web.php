@@ -17,31 +17,42 @@ Route::get('/s', function () {
 });
 
 Route::get('/test', 'TestController@index');
-Route::get('','UserController@page')->middleware('auth');
+
 
 
 
 // Route::get('/{id}', 'UserController@project');
 
-// Project
-Route::post('/add_project', 'ProjectController@add_project')->middleware('auth');
-Route::post('/add_resource', 'ProjectController@add_resource')->middleware('auth');
-Route::post('/edit_resource_update', 'ProjectController@edit_resource_update')->middleware('auth');
-Route::post('/generate_data','ProjectController@generate_data')->middleware('auth');
-Route::get('project/{id}','ProjectController@get_project')->middleware('auth');
-Route::get('project/{id}/p/{id_project}','ProjectController@detail_project')->middleware('auth');
-Route::get('project/{id}/p/{id_project}/resource/{id_resource}','ProjectController@edit_resource')->middleware('auth');
-Route::get('project/{id}/p/{id_project}/new_resource','ProjectController@new_resource')->middleware('auth');
+
+Route::group(['middleware' => 'auth'], function (){
+	Route::get('','UserController@page');
+	Route::get('/help', 'UserController@help');
+
+	// Project
+	Route::post('/add_project', 'ProjectController@add_project');
+	Route::post('/add_resource', 'ProjectController@add_resource');
+	Route::post('/edit_resource_update', 'ProjectController@edit_resource_update');
+	Route::post('/generate_data','ProjectController@generate_data');
+	Route::get('project/{id}','ProjectController@get_project');
+	Route::get('project/{id}/p/{id_project}','ProjectController@detail_project');
+	Route::get('project/{id}/p/{id_project}/resource/{id_resource}','ProjectController@edit_resource');
+	Route::get('project/{id}/p/{id_project}/new_resource','ProjectController@new_resource');
+	Route::post('/delete_resource','ProjectController@delete_resource');
+});
+
 // Route::get('/show/{all}', 'ProjectController@show_json')->where('all', '.*');
 Route::any('api/{db}/{all}', "ProjectController@handleRequest")->where('all', '.*');
-Route::post('/delete_resource','ProjectController@delete_resource')->middleware('auth');
+
 
 //Administrator
-Route::get('/admin/users', 'AdminController@user_show')->middleware('auth','rolesuser');
-Route::post('/delete_user','AdminController@delete_user')->middleware('auth','rolesuser');
-Route::get('/admin/projects','AdminController@project_show')->middleware('auth','rolesuser');
-Route::post('/delete_project','AdminController@delete_project')->middleware('auth','rolesuser');
-Route::get('/admin/projects/{id_project}','AdminController@resource_show')->middleware('auth','rolesuser');
+Route::group(['middleware' => 'auth','rolesuser'], function (){
+	Route::get('/admin/users', 'AdminController@user_show');
+	Route::post('/delete_user','AdminController@delete_user');
+	Route::get('/admin/projects','AdminController@project_show');
+	Route::post('/delete_project','AdminController@delete_project');
+	Route::get('/admin/projects/{id_project}','AdminController@resource_show');
+});
+
 
 
 

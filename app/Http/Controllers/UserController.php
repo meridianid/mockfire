@@ -12,4 +12,9 @@ class UserController extends Controller
     public function page() {
     	return view('dashboard');
     }
+
+    public function help()
+    {
+    	return view('user/help');
+    }
 }
