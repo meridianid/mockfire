@@ -319,15 +319,22 @@ class ProjectController extends Controller
     {
         $data = $request->all();                                            
         $method = $request->method();  
-        $pathToJson = storage_path('/datajson/'.$db .'.json'); //if your path in inside storage folder of laravel
-        Config::set('jsonserver.pathToDb', $pathToJson); //here we set db
-
-        // return Config::get('pathToDb');
-        // return config('jsonserver.pathToDb');
-
-        $jsonServer = new JsonServer();                                     
-        $response = $jsonServer->handleRequest($method, $uri, $data);       
-
-        $response->send();     
+        try {
+            $pathToJson = storage_path('/datajson/'.$db .'.json'); //if your path in inside storage folder of laravel
+            Config::set('jsonserver.pathToDb', $pathToJson); //here we set db
+            // return Config::get('pathToDb');
+            // return config('jsonserver.pathToDb');
+            $jsonServer = new JsonServer();                                     
+            $response = $jsonServer->handleRequest($method, $uri, $data);       
+            $response->send();
+        } catch(Exception $e) {
+            $data = array(
+                    'status' => 404,
+                    'message' => "File not found!"
+                    // 'message' => $e->getMessage()
+                );
+            return json_encode($data);
+            $this->set_response($data, REST_Controller::HTTP_INTERNAL_SERVER_ERROR );
+        }     
     }
 }
