@@ -43,8 +43,8 @@ class ProjectController extends Controller
             'name_project' => $name_project,
             'endpoint' => $rand_str,
         ]);
-        $simpan = public_path().'/users/project/'.$rand_str;
-        File::makeDirectory($simpan);
+        // $simpan = public_path().'/users/project/'.$rand_str;
+        // File::makeDirectory($simpan);
 
         // $create_directory = Storage::MakeDirectory(public_path($rand_str));
 
