@@ -45,7 +45,7 @@ Route::any('api/{db}/{all}', "ProjectController@handleRequest")->where('all', '.
 
 
 //Administrator
-Route::group(['middleware' => 'auth','rolesuser'], function (){
+Route::group(['middleware' => ['auth','rolesuser']], function (){
 	Route::get('/admin/users', 'AdminController@user_show');
 	Route::post('/delete_user','AdminController@delete_user');
 	Route::get('/admin/projects','AdminController@project_show');
