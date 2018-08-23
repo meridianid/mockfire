@@ -26,7 +26,7 @@ Route::get('/test', 'TestController@index');
 
 Route::group(['middleware' => 'auth'], function (){
 	Route::get('','UserController@page');
-	Route::get('/help', 'UserController@help');
+	Route::get('/about', 'UserController@help');
 
 	// Project
 	Route::post('/add_project', 'ProjectController@add_project');
@@ -41,7 +41,7 @@ Route::group(['middleware' => 'auth'], function (){
 });
 
 // Route::get('/show/{all}', 'ProjectController@show_json')->where('all', '.*');
-Route::any('api/{project}/{all}', "ProjectController@handleRequest")->where('all', '.*');
+// Route::any('api/{project}/{all}', "ProjectController@handleRequest")->where('all', '.*');
 
 
 //Administrator

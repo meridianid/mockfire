@@ -15,6 +15,6 @@ class UserController extends Controller
 
     public function help()
     {
-    	return view('user/help');
+    	return view('user.about');
     }
 }

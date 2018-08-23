@@ -46,8 +46,8 @@
           <a href="{{ url('project/'.Auth::user()->id.'') }}"><i class="fa fa-gears"></i> <span>Project</span></a>
         </li>
 
-        <li class="{{ Request::segment(1) === 'help' ? 'active' : null }}">
-          <a href="{{ url('help') }}"><i class="fa fa-graduation-cap"></i> <span>Help</span></a>
+        <li class="{{ Request::segment(1) === 'about' ? 'active' : null }}">
+          <a href="{{ url('about') }}"><i class="fa fa-graduation-cap"></i> <span>About Mockfire</span></a>
         </li>
 
         <li>
