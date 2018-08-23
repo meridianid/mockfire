@@ -15,6 +15,7 @@ use App\Skemaopsi;
 use App\Skemaopsigroup;
 use Faker\Factory as Faker;
 // use Faker\Provider\id_ID\Person as Fakk;
+use Auth;
 use File;
 use Storage;
 use Exception;
@@ -43,15 +44,14 @@ class ProjectController extends Controller
             'name_project' => $name_project,
             'endpoint' => $rand_str,
         ]);
-        // $simpan = public_path().'/users/project/'.$rand_str;
-        // File::makeDirectory($simpan);
+        $simpan = public_path().'/users/project/'.$name_project;
+        File::makeDirectory($simpan, $mode = 0777, true, true);
 
-        // $create_directory = Storage::MakeDirectory(public_path($rand_str));
 
         $user_project = Project::where('user_id',$user_id)->get();
 
         if($create_project) {
-        	return redirect('project/'.$user_id.'')->with('success','Success create project')->with('data_project',$user_project);
+        	return redirect('project/'.Auth::user()->id.'')->with('success','Success create project')->with('data_project',$user_project);
         }
     }
 
@@ -156,7 +156,8 @@ class ProjectController extends Controller
     		}
 
     	}
-        return redirect("/project/$request->ud/p/$request->project_id")->with('success','new resource created !');
+        $ud = Auth::user()->id;
+        return redirect("/project/$ud/p/$request->project_id")->with('success','new resource created !');
     }
 
     public function edit_resource_update(Request $request)
@@ -205,13 +206,20 @@ class ProjectController extends Controller
 		    		}
 	    	}
 	    }
-        return redirect("/project/$request->ud/p/$request->project_id")->with('success','the resource updated !');
+        $ud = Auth::user()->id;
+        return redirect("/project/$ud/p/$request->project_id")->with('success','the resource updated !');
     }
 
     public function generate_data(Request $request)
     {
     	// return $request->all();
+        $ud = Auth::user()->id;
     	$data = Skema::where('resource_id',$request->resource_id)->where('parent_id','')->with('child')->select('id','name_schema','type_schema','parent_id','field')->get();
+        $search_ = Resource::where('id', $request->resource_id)->first();
+        if(!$search_){
+            return redirect("/project/$ud/p/$request->pid")->with('failed','Resource not found');
+        }
+        $searchProject = Project::where('id', $search_->project_id)->first();
 
     	$faker = Faker::create();
     	$no = 1;
@@ -242,19 +250,24 @@ class ProjectController extends Controller
         	}
             array_push($resouc, $ha);
         }
-    	$di_encode = json_encode(['posts' => $resouc]);
+    	$di_encode = json_encode([$search_->name_resource => $resouc]);
         // return response()->json(['result'=>true,'data'=>'success make order'],200);
         // return $di_encode;
     	$file = '.json';
 	    // $destinationPath=public_path('/users/project/'.$request->endpoint.'')."/$request->nrs";
-        $destinationPath=storage_path('/datajson')."/$request->nrs";
-	   //  if (!is_dir($destinationPath)) {
-	   //  	mkdir($destinationPath,0777,true);  
-	  	// }
-	  	// Storage::disk('public_data')->put($destinationPath$file, $di_encode);
-	    File::put($destinationPath.$file,$di_encode);
+        $destinationPath=public_path('/users/project')."/$searchProject->name_project/";
+        if (!is_dir($destinationPath)) {
+         mkdir($destinationPath,0777,true);  
+        }
+        // Storage::disk('public_data')->put($destinationPath$file, $di_encode);
+	    // $create  = File::put($destinationPath.$file,$di_encode);
+        $create = file_put_contents($destinationPath.$search_->name_resource.$file,$di_encode);
     	// echo $di_encode;
-        return redirect("/project/$request->ud/p/$request->pid")->with('success','the resource has generated, for check please click the name of your resource !');
+        if($create){
+            return redirect("/project/$ud/p/$request->pid")->with('success','the resource has generated, for check please click the name of your resource !');
+        }else{
+            return redirect("/project/$ud/p/$request->pid")->with('failed','Failed to generate data');
+        }
     }
 
     # DO NOT USE , THIS FUNCTION NOT FIX
@@ -315,12 +328,13 @@ class ProjectController extends Controller
         return redirect("/project/$request->ud/p/$request->pid")->with('success','the resource deleted !');
     }
 
-    public function handleRequest(Request $request, $db, $uri)
+    public function handleRequest(Request $request, $project, $uri)
     {
-        $data = $request->all();                                            
+        $data = $request->all();                          
+        $db = explode('/', $uri);      
         $method = $request->method();  
         try {
-            $pathToJson = storage_path('/datajson/'.$db .'.json'); //if your path in inside storage folder of laravel
+            $pathToJson = public_path('users/project/'.$project.'/'.$db[0] .'.json'); //if your path in inside storage folder of laravel
             Config::set('jsonserver.pathToDb', $pathToJson); //here we set db
             // return Config::get('pathToDb');
             // return config('jsonserver.pathToDb');

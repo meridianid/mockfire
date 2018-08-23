@@ -14,8 +14,8 @@
                     </div>
                 </div>
                 <div class="box-body">
-                    <pre><strong>{{ url('/') }}/api/</strong>:endpoint<strong>/posts</strong></pre><br>
-                    If you want use <strong>GET</strong> by <strong>ID</strong> use this ; <pre>{{ url('/') }}/api/:endpoint/posts<strong>/1</strong></pre>
+                    <pre><strong>{{ url('/') }}/api/{{ $data_project->name_project }}</strong>/:endpoint</pre><br>
+                    If you want use <strong>GET</strong> by <strong>ID</strong> use this ; <pre>{{ url('/') }}/api/{{ $data_project->name_project }}/:endpoint<strong>/1</strong></pre>
                     <br>
                         <a href="/project/{{ Auth::user()->id }}/p/{{ $data_project->id }}/new_resource" class="btn btn-primary">New Resource</a>
                         <br /><br />
@@ -31,6 +31,12 @@
                 <h4><i class="icon fa fa-check"></i> Success!</h4>
                 {{ Session::get('success')}}
                 </div>
+            @elseif (Session::has('failed'))
+                <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-close"></i> Failed!</h4>
+                {{ Session::get('failed')}}
+                </div>
             @endif
         </div>
 
@@ -39,7 +45,7 @@
             <div class='col-md-3'>
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Resource <strong><a href="/api/{{ $data->name_resource }}/posts">{{ $data->name_resource }}</a></strong></h3>
+                        <h3 class="box-title">Resource <strong><a href="/api/{{ $data_project->name_project }}/{{ $data->name_resource }}">{{ $data->name_resource }}</a></strong></h3>
                         <div class="box-tools pull-right">
                             <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
                             <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
