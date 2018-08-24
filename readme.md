@@ -10,7 +10,8 @@ Mockfire is a free tool that lets you easily mock up APIs, generate custom data,
 - PHP artisan key:generate
 
 ## How To Use
-- First, open mockfire dashboard and login.
+- First, open mockfire dashboard.
+- If you have account, monggo login. mun teu aya, register heula..
 - In sidebar , click menu [project]().
 - Then, Click "+" Add New Project. Input your project name.
 - Go to your project.
