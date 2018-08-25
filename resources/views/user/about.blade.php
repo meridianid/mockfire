@@ -13,7 +13,7 @@
                     </div>
                 </div>
                 <div class="box-body">
-                    <p>MockAPI is a <strong>free tool</strong> that lets you easily mock up APIs, generate custom data, and preform operations on it using RESTful interface. MockAPI is meant to be used as a prototyping/testing/learning tool.</p>
+                    <p>Mockfire is a <strong>free tool</strong> that lets you easily mock up APIs, generate custom data, and preform operations on it using RESTful interface. MockAPI is meant to be used as a prototyping/testing/learning tool.</p>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
         </div><!-- /.col -->
@@ -29,12 +29,19 @@
                     </div>
                 </div>
                 <div class="box-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <ul>
+                        <li>In sidebar , click menu <a href="{{ url('/') }}/project/{{ Auth::user()->id }}">project</a>.</li>
+                        <li>Then, Click "+" Add New Project. Input your project name.</li>
+                        <li>Go to your project.</li>
+                        <li>In project page, you must create new resource.</li>
+                        <li>Input your name resource, method resource and schema .</li>
+                        <li>Schema will be used to generate mock data .</li>
+                        <li>For add new column schema , click "+" or for delete column schema click "X".</li>
+                        <li>If you selected object data "Array" , there will be new button "+". click the button for add field for "Array".</li>
+                        <li>Click "Create" .</li>
+                        <li>Your New resource has been created . for generate mock data , click "Generate Data". </li>
+                        <li>You can access your resource , click name your resource (Resource [Name Resource]) .</li>
+                    </ul>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
         </div><!-- /.col -->

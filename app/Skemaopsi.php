@@ -13,6 +13,6 @@ class Skemaopsi extends Model
     ];
 
     public function skemaopsigroup() {
-        return $this->belongsTo('App\Skemaopsi');
+        return $this->belongsTo('App\Skemaopsigroup');
     }
 }

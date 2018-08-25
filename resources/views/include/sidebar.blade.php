@@ -38,6 +38,12 @@
               <li class="{{ Request::segment(2) === 'users' ? 'active' : null }}">
                 <a href="{{ url('admin/users') }}"><i class="fa fa-users"></i> <span>Users Control</span></a>
               </li>
+              <li class="{{ Request::segment(2) === 'data_opsi' ? 'active' : null }}">
+                <a href="{{ url('admin/data_opsi') }}"><i class="fa fa-book"></i> <span>Mock Data Control</span></a>
+              </li>
+              <li class="{{ Request::segment(2) === 'data_category' ? 'active' : null }}">
+                <a href="{{ url('admin/data_category') }}"><i class="fa fa-book"></i> <span>Category Control</span></a>
+              </li>
             </ul>
           </li>
         @endif

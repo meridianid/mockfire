@@ -81,11 +81,12 @@ class ProjectController extends Controller
     	if($data_project){
     		$data_resource = Resource::where('id',$id_resources)->first();
     		$data_skema = Skema::where('resource_id',$id_resources)->get();
-    		$data_opsi = Skemaopsi::with('skemaopsigroup')->select('skemaopsigroup_id','name_opsi','value_opsi')->get();
+    		$data_opsi = Skemaopsi::get();
+            $data_opsigroup = Skemaopsigroup::get();
     		$data_cek = Skema::where('resource_id',$id_resources)->where('type_schema','array')->get();
     		// return $cek;
     		// return $skema;
-    		return view('user.edit_resource', compact('data_skema','data_project','data_resource','data_opsi','data_cek'));
+    		return view('user.edit_resource', compact('data_skema','data_project','data_resource','data_opsi','data_opsigroup','data_cek'));
     	}
     	
     }
@@ -98,7 +99,8 @@ class ProjectController extends Controller
     	// return view('user.new_resource')->with('data_project',$project)->with('data_opsi', $opsiskema)->with('data_group_opsi', $opsigroupnya);
     	$data_project = Project::where('user_id',$id)->where('id',$id_project)->first();
     	$data_opsigroup = Skemaopsigroup::get();
-    	$data_opsi = Skemaopsi::with('skemaopsigroup')->select('skemaopsigroup_id','name_opsi','value_opsi')->get();
+        // return $data_opsigroup;
+    	$data_opsi = Skemaopsi::get();
     	
     	return view('user.new_resource', compact('data_project','data_opsi','data_opsigroup'));
     }
@@ -213,6 +215,7 @@ class ProjectController extends Controller
     public function generate_data(Request $request)
     {
     	// return $request->all();
+        // require_once '/path/to/Faker/src/autoload.php';
         $ud = Auth::user()->id;
     	$data = Skema::where('resource_id',$request->resource_id)->where('parent_id','')->with('child')->select('id','name_schema','type_schema','parent_id','field')->get();
         $search_ = Resource::where('id', $request->resource_id)->first();
@@ -221,7 +224,10 @@ class ProjectController extends Controller
         }
         $searchProject = Project::where('id', $search_->project_id)->first();
 
-    	$faker = Faker::create();
+    	
+        // $faker = Faker\Generator();
+        // $faker->addProvider(new Faker\Provider\en_US\Person($faker));
+        $faker = Faker::create();
     	$no = 1;
 
         // return $faker->nik();

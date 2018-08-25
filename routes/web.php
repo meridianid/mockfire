@@ -47,10 +47,30 @@ Route::group(['middleware' => 'auth'], function (){
 //Administrator
 Route::group(['middleware' => ['auth','rolesuser']], function (){
 	Route::get('/admin/users', 'AdminController@user_show');
+	Route::get('/admin/data_opsi', 'AdminController@get_data_opsi');
 	Route::post('/delete_user','AdminController@delete_user');
 	Route::get('/admin/projects','AdminController@project_show');
 	Route::post('/delete_project','AdminController@delete_project');
 	Route::get('/admin/projects/{id_project}','AdminController@resource_show');
+	Route::get('/admin/data_category','AdminController@category_show');
+
+	//Add Data
+		#Mock Data
+		Route::get('/admin/data_opsi/tambah', 'AdminController@add_data');
+		Route::post('/admin/data_opsi/tambah/proses', 'AdminController@add_data_proses');
+
+		#Kategori
+		Route::get('/admin/data_category/tambah', 'AdminController@add_category');
+		Route::post('/admin/data_category/tambah/proses', 'AdminController@add_category_proses');
+
+	//Edit Data
+		#Mock Data
+		Route::get('/admin/data_opsi/edit/{id}', 'AdminController@edit_data');
+		Route::post('/admin/data_opsi/edit/proses', 'AdminController@edit_data_proses');
+
+		#Kategori
+		Route::get('/admin/data_category/edit/{id}', 'AdminController@edit_category');
+		Route::post('/admin/data_category/edit/proses', 'AdminController@edit_category_proses');
 });
 
 

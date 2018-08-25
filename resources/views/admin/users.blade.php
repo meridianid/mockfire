@@ -26,7 +26,7 @@
                       @foreach($data_user as $user)
                           <tr>
                               <td><a>#{{ $no++ }}</a></td>
-                              <td>{{ $user->name }}</td>->
+                              <td>{{ $user->name }}</td>
                               <td>{{ $user->email }}</td>
                               <td>{{ $user->role }}</td>
                               <td><form class="form-horizontal" method="POST" action="{{action('AdminController@delete_user')}}">

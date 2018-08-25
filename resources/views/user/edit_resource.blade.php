@@ -1,4 +1,4 @@
-@extends('edit_template')
+@extends('admin_template')
 
 @section('content')
 <a href="/project/{{ Auth::user()->id }}" class="btn bg-olive margin">Project</a> <button type="button" class="btn bg-olive margin"><i class="fa fa-arrow-right"></i></button>  <a href="/project/{{ Auth::user()->id }}/p/{{ $data_project->id }}" class="btn bg-olive margin"><strong>{{ $data_project->name_project }}</strong></a> <button type="button" class="btn bg-olive margin"><i class="fa fa-arrow-right"></i></button>  <a class="btn bg-olive margin"><strong>{{ $data_resource->name_resource }}</strong></a>
@@ -68,11 +68,7 @@
 		                     				</div>
 		                     				<div class="col-xs-4">
 		                     					<select class="form-control select2 select_type" name="field[{{ $data->field }}][value]" style="width: 100%;" id="type">
-		                     						<option value="{{ $data->type_schema }}" selected="selected">{{ $data->type_schema }} (Current)</option>
-		                     						@isset($data_opsi) @foreach($data_opsi as $databaru)
-		                     						<option value="{{ $databaru->name_opsi }}">
-		                     							{{ $databaru->value_opsi }}
-		                     						</option>@endforeach @endisset
+		                     						@isset($data_opsigroup) @foreach($data_opsigroup as $databaru)<optgroup label="{{ $databaru->option_grup }}">@isset($data_opsi) @foreach($data_opsi as $opsi) @if($opsi->skemaopsigroup_id == $databaru->id) @if($data->type_schema == $opsi->name_opsi) <option value="{{ $data->type_schema }}" selected="selected">{{ $opsi->value_opsi }} (Current)</option>  @else <option value="{{ $opsi->name_opsi }}">{{ $opsi->value_opsi }}</option> @endif @endif  @endforeach @endisset</optgroup>@endforeach @endisset
 		                     					</select>
 		                     					
 		                     				</div>
@@ -89,9 +85,9 @@
 						                     			<div class="new_form2 form-group">
 						                     				<!-- <input type="text" class="form-control valuefield" onkeyup="nospaces(this)" name="field[{{ $data2->field }}][value][array][type][]" value="{{ $data2->type_schema }}">	 -->
 						                     				<select class="form-control select2" name="field[{{ $data->field }}][value][array][type][]" style="width: 100%;" id="type">
-						                     				<option value="{{ $data2->type_schema }}">{{ $data2->type_schema }} (Current)</option>
-				                     						@isset($data_opsi) @foreach($data_opsi as $databaru)
-				                     						<option value="{{ $databaru->name_opsi }}">{{ $databaru->value_opsi }}</option>@endforeach @endisset</select>
+						                     				<!-- <option value="{{ $data2->type_schema }}">{{ $data2->type_schema }} (Current)</option> -->
+				                     						@isset($data_opsigroup) @foreach($data_opsigroup as $databaru)<optgroup label="{{ $databaru->option_grup }}">@isset($data_opsi) @foreach($data_opsi as $opsi) @if($opsi->skemaopsigroup_id == $databaru->id) @if($data2->type_schema == $opsi->name_opsi) <option value="{{ $data2->type_schema }}" selected="selected">{{ $opsi->value_opsi }} (Current)</option>  @else <option value="{{ $opsi->name_opsi }}">{{ $opsi->value_opsi }}</option> @endif @endif  @endforeach @endisset</optgroup>@endforeach @endisset
+				                     						</select>
 						                     			</div>
 						                     		</div>
 						                     		<!-- <div class="col-md-1 skema3">
@@ -117,9 +113,8 @@
 		                     						@php $disabled = "" @endphp
 		                     					@endif
 			                     					<select class="form-control select2 select_type" name="field[{{ $data->field }}][value]" style="width: 100%;" id="type" {{ $disabled }}>
-							                     	<option value="{{ $data->type_schema }}">{{ $data->type_schema }} (Current)</option>
-					                     			@isset($data_opsi) @foreach($data_opsi as $databaru)
-					                     			<option value="{{ $databaru->name_opsi }}">{{ $databaru->value_opsi }}</option>@endforeach @endisset</select>
+							                     	@isset($data_opsigroup) @foreach($data_opsigroup as $databaru)<optgroup label="{{ $databaru->option_grup }}">@isset($data_opsi) @foreach($data_opsi as $opsi) @if($opsi->skemaopsigroup_id == $databaru->id) @if($data->type_schema == $opsi->name_opsi) <option value="{{ $data->type_schema }}" selected="selected">{{ $opsi->value_opsi }} (Current)</option>  @else <option value="{{ $opsi->name_opsi }}">{{ $opsi->value_opsi }}</option> @endif @endif  @endforeach @endisset</optgroup>@endforeach @endisset
+					                     			</select>
 		                     				</div>
 		                     				@if($data->type_schema != 'ObjectID')		                     				
 		                     					<p class="add_array"><a href="#" class="btn btn-danger remove_field" title="Delete"><i class="fa fa-remove"></i></a> </p>
@@ -141,7 +136,7 @@
                   		<input type="hidden" name="project_id" value="{{ $data_project->id }}">
                         </div>
                         <div class="modal-footer">
-                          <button type="submit" class="btn btn-primary">Edit</button>
+                          <button type="submit" class="btn btn-primary">Save Change</button>
                         </div>
                     </form>
                 </div><!-- /.box-body -->
