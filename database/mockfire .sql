@@ -3,18 +3,12 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 24 Agu 2018 pada 13.06
+-- Generation Time: 25 Agu 2018 pada 19.53
 -- Versi Server: 5.7.23-0ubuntu0.16.04.1
 -- PHP Version: 7.1.20-1+ubuntu16.04.1+deb.sury.org+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `mockfire`
@@ -92,7 +86,8 @@ INSERT INTO `projects` (`id`, `user_id`, `name_project`, `created_at`, `updated_
 (12, 1, 'mockfire1', '2018-08-09 02:49:39', '2018-08-09 02:49:39', 'aW8w8htaxmbmRmp'),
 (13, 6, 'tes', '2018-08-09 03:31:35', '2018-08-09 03:31:35', 'd1qaGP2l85ZpKaP'),
 (19, 1, 'bangunindo', '2018-08-23 01:06:38', '2018-08-23 01:06:38', 'c9n2N9MculJrq2K'),
-(20, 1, 'halohalo', '2018-08-23 01:07:01', '2018-08-23 01:07:01', 'uON1nhslUxgaHuJ');
+(20, 1, 'halohalo', '2018-08-23 01:07:01', '2018-08-23 01:07:01', 'uON1nhslUxgaHuJ'),
+(21, 1, 'dpayer', '2018-08-24 09:58:19', '2018-08-24 09:58:19', 'Ou3zunOppvzITAZ');
 
 -- --------------------------------------------------------
 
@@ -116,7 +111,8 @@ CREATE TABLE `resources` (
 INSERT INTO `resources` (`id`, `project_id`, `name_resource`, `type`, `created_at`, `updated_at`) VALUES
 (5, 11, 'users', 'POST', '2018-08-06 06:48:20', '2018-08-06 06:48:20'),
 (1533780946, 11, 'tes', 'POST', '2018-08-09 02:15:46', '2018-08-09 02:15:46'),
-(1534986622, 20, 'users', 'POST', '2018-08-23 01:10:22', '2018-08-23 01:10:22');
+(1534986622, 20, 'users', 'POST', '2018-08-23 01:10:22', '2018-08-23 01:10:22'),
+(1535105541, 11, 'number', 'POST', '2018-08-24 10:12:21', '2018-08-24 10:12:21');
 
 -- --------------------------------------------------------
 
@@ -154,11 +150,13 @@ INSERT INTO `skema` (`id`, `resource_id`, `name_schema`, `type_schema`, `parent_
 (92, 5, 'Address2', 'secondaryAddress', '90', 'field3', '2018-08-09 03:04:34', '2018-08-09 03:04:34'),
 (93, 5, 'ZipCode', 'postcode', '90', 'field3', '2018-08-09 03:04:34', '2018-08-09 03:04:34'),
 (94, 5, 'Phone', 'phoneNumber', '', 'field4', '2018-08-09 03:04:34', '2018-08-09 03:04:34'),
-(95, 1534986622, 'id', 'ObjectID', '', 'field1', '2018-08-23 01:10:22', '2018-08-23 01:10:22'),
-(96, 1534986622, 'Name', 'array', '', 'field2', '2018-08-23 01:10:22', '2018-08-23 01:10:22'),
-(97, 1534986622, 'FirstName', 'firstName', '96', 'field2', '2018-08-23 01:10:22', '2018-08-23 01:10:22'),
-(98, 1534986622, 'LastName', 'postcode', '96', 'field2', '2018-08-23 01:10:22', '2018-08-23 01:10:22'),
-(99, 1534986622, 'Address', 'streetAddress', '', 'field4', '2018-08-23 01:10:22', '2018-08-23 01:10:22');
+(140, 1535105541, 'id', 'ObjectID', '', 'field1', '2018-08-24 13:52:47', '2018-08-24 13:52:47'),
+(141, 1535105541, 'nomor', 'locale', '', 'field2', '2018-08-24 13:52:47', '2018-08-24 13:52:47'),
+(147, 1534986622, 'id', 'ObjectID', '', 'field1', '2018-08-25 12:15:12', '2018-08-25 12:15:12'),
+(148, 1534986622, 'Name', 'array', '', 'field2', '2018-08-25 12:15:12', '2018-08-25 12:15:12'),
+(149, 1534986622, 'FirstName', 'firstName', '148', 'field2', '2018-08-25 12:15:12', '2018-08-25 12:15:12'),
+(150, 1534986622, 'LastName', 'postcode', '148', 'field2', '2018-08-25 12:15:12', '2018-08-25 12:15:12'),
+(151, 1534986622, 'Address', 'city', '', 'field4', '2018-08-25 12:15:12', '2018-08-25 12:15:12');
 
 -- --------------------------------------------------------
 
@@ -193,22 +191,25 @@ INSERT INTO `skemaopsi` (`id`, `skemaopsigroup_id`, `name_opsi`, `value_opsi`, `
 (12, 2, 'departmentName', 'Department', NULL, NULL),
 (21, 3, 'monthNameGenitive', 'Month', NULL, NULL),
 (23, 4, 'image', 'Image', NULL, NULL),
-(25, 5, 'prefixMale', 'Prefix Male', NULL, NULL),
+(25, 5, 'firstNameMale', 'First Name Male', NULL, NULL),
 (26, 5, 'firstName', 'First Name', NULL, NULL),
 (27, 5, 'lastName', 'Last Name', NULL, NULL),
 (28, 5, 'name', 'Full Name', NULL, NULL),
 (29, 5, 'jobTitle', 'Job Title', NULL, NULL),
-(30, 5, 'prefixFemale', 'Prefix Female', NULL, NULL),
+(30, 5, 'firstNameFemale', 'First Name Female', NULL, NULL),
 (31, 5, 'title', 'Title', NULL, NULL),
 (35, 6, 'phoneNumber', 'Phone Number', NULL, NULL),
-(36, 7, 'Number', 'Number', NULL, NULL),
+(36, 7, 'randomNumber', 'Random Digit', NULL, NULL),
 (37, 7, 'uuid', 'UUID', NULL, NULL),
 (38, 7, 'boolean', 'Boolean', NULL, NULL),
 (39, 7, 'word', 'Word', NULL, NULL),
 (40, 7, 'words', 'Words', NULL, NULL),
 (41, 7, 'locale', 'Locale', NULL, NULL),
 (49, 9, 'object', 'Object', NULL, NULL),
-(50, 10, 'array', 'Array', NULL, NULL);
+(50, 10, 'array', 'Array', NULL, NULL),
+(51, 7, 'nik', 'NIK', NULL, NULL),
+(52, 7, 'paragraphs', 'Paragraphs', '2018-08-25 12:17:06', '2018-08-25 12:29:29'),
+(53, 1, 'streetName', 'Street Name', '2018-08-25 12:18:13', '2018-08-25 12:18:13');
 
 -- --------------------------------------------------------
 
@@ -238,7 +239,7 @@ INSERT INTO `skemaopsigroup` (`id`, `option_grup`, `created_at`, `updated_at`) V
 (8, 'SYSTEM', NULL, NULL),
 (9, 'OBJECT', NULL, NULL),
 (10, 'ARRAY', NULL, NULL),
-(11, 'DEPARTMENT', NULL, NULL);
+(11, 'INTERNET', '2018-08-25 12:41:19', '2018-08-25 12:48:23');
 
 -- --------------------------------------------------------
 
@@ -262,9 +263,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Dhiemas Ganisha', 'dhimasganisha@gmail.com', '$2y$10$84lFAkDMKYm.Tx/BZaMA8Od.7xTkmfqbYtd/nghnZn3O.0jPXpvBG', 'Administrator', 'pBsuIFqEhwsRqBHoeaKZER68cctVrQGwCYdNdfkKMvV7heD32GR4BCWJ0rxO', '2018-07-29 19:40:45', '2018-07-29 19:40:45'),
+(1, 'Dhiemas Ganisha', 'dhimasganisha@gmail.com', '$2y$10$84lFAkDMKYm.Tx/BZaMA8Od.7xTkmfqbYtd/nghnZn3O.0jPXpvBG', 'Administrator', 'hBOJyxM3AmwjEoJbzTXG2ln58G9ErRFP4BKXshGEyJFE0Dwd4AoNBC23Rl9O', '2018-07-29 19:40:45', '2018-07-29 19:40:45'),
 (6, 'Akun Demo', 'demo@gmail.com', '$2y$10$SaVxuZ0IuIm0Xza3LQZgtePWqSTtUW4.tu/hFtGfwLfFp7Bv.mjgq', 'User', 'wVXZfpr1wMun2WHDSjtBPke8SJsaSaflDUerZk6gqeOnMiSrHKfcBA2Ctnf9', '2018-08-01 07:25:07', '2018-08-01 07:25:07'),
-(7, 'tes', 'tes@gmail.com', '$2y$10$njaP2FvVyk7jXlO41q8LreRP067nJGfPdZL3Ofgnlp25aDYvaitCq', 'User', NULL, '2018-08-10 14:12:53', '2018-08-10 14:12:53');
+(7, 'tes', 'tes@gmail.com', '$2y$10$njaP2FvVyk7jXlO41q8LreRP067nJGfPdZL3Ofgnlp25aDYvaitCq', 'User', NULL, '2018-08-10 14:12:53', '2018-08-10 14:12:53'),
+(8, 'Admin Web', 'admin@admin.com', '$2y$10$Mwpn7lVx1Iryx9V7oCXEL.8sifLv9mlPg5FkTkILfqBwb8rivEBku', 'User', NULL, '2018-08-25 12:49:38', '2018-08-25 12:49:38');
 
 --
 -- Indexes for dumped tables
@@ -336,22 +338,22 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `resources`
 --
 ALTER TABLE `resources`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1534986623;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1535105542;
 --
 -- AUTO_INCREMENT for table `skema`
 --
 ALTER TABLE `skema`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
 --
 -- AUTO_INCREMENT for table `skemaopsi`
 --
 ALTER TABLE `skemaopsi`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 --
 -- AUTO_INCREMENT for table `skemaopsigroup`
 --
@@ -361,7 +363,7 @@ ALTER TABLE `skemaopsigroup`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
@@ -389,7 +391,3 @@ ALTER TABLE `skema`
 --
 ALTER TABLE `skemaopsi`
   ADD CONSTRAINT `skemaopsi_skemaopsigroup_id_foreign` FOREIGN KEY (`skemaopsigroup_id`) REFERENCES `skemaopsigroup` (`id`);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
