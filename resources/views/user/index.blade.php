@@ -48,7 +48,7 @@
               	{{ csrf_field() }}
 	              <div class="modal-body">
 	              	ex : Todoapp, github, secretproject
-	                <input class="form-control" type="text" name="name_project" placeholder="Project Name">
+	                <input class="form-control" type="text" onkeyup="nospaces(this)" name="name_project" placeholder="Project Name">
 	                <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
 	                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
 	              </div>

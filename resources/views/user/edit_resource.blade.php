@@ -58,7 +58,6 @@
                       	<div class="row daftar-isi">
                       		@php $no = 1; @endphp
 		                      @foreach($data_skema as $data)
-		                      			
 		                      		@if($data->type_schema == 'array')
 		                     			<div class="skema">
 		                     				@php $hiha = $data->field; @endphp
@@ -72,22 +71,28 @@
 		                     					</select>
 		                     					
 		                     				</div>
-		                     					<p class="add_array"><a href="#" class="btn btn-danger remove_field" title="Delete"><i class="fa fa-remove"></i></a> <a class="skema_add_field btn btn-primary" title="Add New Array"><i class="fa fa-plus"></i></a></p>
+		                     					<p class="add_array"><a href="#" class="btn btn-danger remove_field" title="Delete"><i class="fa fa-remove"></i></a> <a class="skema_add_field btn btn-primary" title="Add New Array"><i class="fa fa-plus"></i></a></p><br>
+		                     				@php $nomor = 1; $nomor2 = 1; $nomor3 = 1; @endphp
 		                     				@foreach($data_skema as $data2)	
 			                     				@if($data2->parent_id != '' && $data2->field == $hiha)
 				                     				<div class="col-xs-4"></div>
 				                     				<div class="col-md-4 skema2">
-						                     			<div class="new_form form-group">
+						                     			<div class="new_form d{{ $nomor++ }} form-group">
 						                     				<input type="text" class="form-control namefield" onkeyup="nospaces(this)" name="field[{{ $data->field }}][value][array][data][]" value="{{ $data2->name_schema }}">
 						                     			</div>	
 						                     	 	</div>
-						                     	 	<div class="col-md-4 skema3">
-						                     			<div class="new_form2 form-group">
+						                     	 	<div class="col-md-3 skema3">
+						                     			<div class="new_form2 d{{ $nomor2++ }} form-group">
 						                     				<!-- <input type="text" class="form-control valuefield" onkeyup="nospaces(this)" name="field[{{ $data2->field }}][value][array][type][]" value="{{ $data2->type_schema }}">	 -->
 						                     				<select class="form-control select2" name="field[{{ $data->field }}][value][array][type][]" style="width: 100%;" id="type">
 						                     				<!-- <option value="{{ $data2->type_schema }}">{{ $data2->type_schema }} (Current)</option> -->
 				                     						@isset($data_opsigroup) @foreach($data_opsigroup as $databaru)<optgroup label="{{ $databaru->option_grup }}">@isset($data_opsi) @foreach($data_opsi as $opsi) @if($opsi->skemaopsigroup_id == $databaru->id) @if($data2->type_schema == $opsi->name_opsi) <option value="{{ $data2->type_schema }}" selected="selected">{{ $opsi->value_opsi }} (Current)</option>  @else <option value="{{ $opsi->name_opsi }}">{{ $opsi->value_opsi }}</option> @endif @endif  @endforeach @endisset</optgroup>@endforeach @endisset
 				                     						</select>
+						                     			</div>
+						                     		</div>
+						                     		<div class="col-md-1 skema4">
+						                     			<div class="remove-button d{{ $nomor3++ }}">
+						                     				<p class="remove_array"><a class="text-danger"><i class="fa fa-close"></i></a></p><br><p></p>
 						                     			</div>
 						                     		</div>
 						                     		<!-- <div class="col-md-1 skema3">
@@ -97,8 +102,9 @@
 						                     		</div> -->
 						                     	@endif
 						                     @endforeach
+						                     <br>
 						                 </div>
-						                 <br>
+						                 
 		                     		@elseif ($data->parent_id == '')
 		                     			<div class="skema">
 		                     				<div class="col-xs-4">
@@ -121,7 +127,7 @@
 		                     				@endif
 		                     				<div class="col-xs-4"></div>
 		                     				<div class="col-md-4 skema2"></div>
-		                     				<div class="col-md-4 skema3"></div><br><br>
+		                     				<div class="col-md-4 skema3"></div>
 		                     			</div>
 		                     		@endif
 

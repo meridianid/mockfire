@@ -5,7 +5,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Tambah Data</h3>
+                  <h3 class="box-title">Edit Data</h3>
                 </div>
                 <!-- /.box-header -->
                 <form class="form-horizontal" method="POST" action="{{ url('/') }}/admin/data_category/edit/proses">
@@ -21,7 +21,7 @@
 
                   <div class="box-footer">
                     <a href="/admin/data_category" class="btn btn-primary pull-left">Back</a>
-                    <button type="submit" class="btn btn-primary pull-right">Tambah Data</button>
+                    <button type="submit" class="btn btn-primary pull-right">Simpan Pereubahan</button>
                   </div>
                   <!-- /.box-footer -->
                 </form>

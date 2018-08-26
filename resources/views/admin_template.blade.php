@@ -119,9 +119,6 @@ desired effect
      user experience. -->
 <script>
   $(document).ready(function () {
-    //Initialize Select2 Elements
-    $('.select2').select2()
-
     $('#data').DataTable()
     $('#table').DataTable({
       'paging'      : true,
@@ -163,10 +160,10 @@ desired effect
                     
                     no++;
                     var tes = fieldbaru.replace(fieldbaru,'field[field'+no+']');
-                    // console.log(tes);
+                    console.log(tes);
                     // source: "/tes"
 
-                    $(wrapper).append('<div class="skema"><div class="col-xs-4"><input class="form-control namefield" onkeyup="nospaces(this)" type="text" name="'+tes+'[key]" placeholder="Field Name"></div><div class="col-xs-4"><select class="form-control select2 select_type" name="'+tes+'[value]" style="width: 100%;" id="type">@isset($data_opsigroup) @foreach($data_opsigroup as $databaru)<optgroup label="{{ $databaru->option_grup }}">@isset($data_opsi) @foreach($data_opsi as $opsi) @if($opsi->skemaopsigroup_id == $databaru->id)<option value="{{ $opsi->name_opsi }}">{{ $opsi->value_opsi }}</option> @endif @endforeach @endisset</optgroup>@endforeach @endisset</select></div><p class="add_array"><a href="#" class="btn btn-danger remove_field" title="Delete"><i class="fa fa-remove"></i></a> </p><div class="col-xs-4"></div><div class="col-md-4 skema2"></div><div class="col-md-4 skema3"></div></div><br>'); 	
+                    $(wrapper).append('<div class="skema"><div class="col-xs-4"><input class="form-control namefield" onkeyup="nospaces(this)" type="text" name="'+tes+'[key]" placeholder="Field Name"></div><div class="col-xs-4"><select class="form-control select2 select_type" name="'+tes+'[value]" style="width: 100%;" id="type">@isset($data_opsigroup) @foreach($data_opsigroup as $databaru)<optgroup label="{{ $databaru->option_grup }}">@isset($data_opsi) @foreach($data_opsi as $opsi) @if($opsi->skemaopsigroup_id == $databaru->id)<option value="{{ $opsi->name_opsi }}">{{ $opsi->value_opsi }}</option> @endif @endforeach @endisset</optgroup>@endforeach @endisset</select></div><p class="add_array"><a href="#" class="btn btn-danger remove_field" title="Delete"><i class="fa fa-remove"></i></a> </p><div class="col-xs-4"></div><div class="form-skema"><div class="col-md-4 skema2"></div><div class="col-md-3 skema3"></div></div><div class="col-md-1 skema4"></div><br></div>'); 	
 		        }
 		    });
             
@@ -188,6 +185,7 @@ desired effect
                             	console.log($(this).parents(".skema").find(".skema_add_field").remove())
                             	console.log($(this).parents(".skema").find(".skema2").empty())
                             	console.log($(this).parents(".skema").find(".skema3").empty())
+                              console.log($(this).parents(".skema").find(".skema4").empty())
                             	console.log("wad")
                             	// console.log($(this).find(".skema2").remove())
                             	// console.log($(this).parents(".skema3").find(".new_form2").remove())
@@ -196,12 +194,31 @@ desired effect
 </script>
         <script type="text/javascript">
         	var x = 1;
+          // x++
+        	$(this.document).on("click",".remove_array", function(e){ //user click on remove text
+                alert('Yakin untuk menghapus?')
+                var w = e.preventDefault(); $(this).parents('.skema4'); x--;
+                // $(this).parent('.skema4').find('.remove_array').addClass( "highlight" );
+                var cari_button = $(this).parent('.remove-button');
+                // $(this).
+                // console.log(cari_button);
+                // var fieldbaru = $('.skema').last().find('.namefield').attr('name')
+                var cari_classhps = cari_button.append('').attr('class')
+                var wow = cari_classhps.split('remove-button')
+                var wow2 = wow[1].split('d');
+                var codenya = wow2[1].replace(wow2[1],wow2[1]+'d.');
+                // alert("w"+codenya+"w")
+                var dibalik = codenya.split("").reverse().join("")
+                // console.log($(this).parent('.skema2').find('.d'+wow[1]));
+                var cari_a1 = $(this).parents('.skema').find('.skema2')
+                var cari_a2 = $(this).parents('.skema').find('.skema3')
+                $(cari_a1).find(dibalik).empty()
+                $(cari_a2).find(dibalik).empty()
+                $(cari_button).remove()
+                // console.log(cari_a2)
+                // $(this).parent('.skema3').find('.new_form2').remove();
+                // $(this).parent('.skema3').find('.remove_field2').remove();
 
-        	$(document).on("click",".remove_field2", function(e){ //user click on remove text
-        		 e.preventDefault();
-                $(this).parent('.skema2').find('.new_form').remove();
-                $(this).parent('.skema3').find('.new_form2').remove();
-                $(this).parent('.skema3').find('.remove_field2').remove();
                 x--;
             })
 
@@ -214,25 +231,11 @@ desired effect
         			var search_field = $(this).parents('.skema').find('.select_type').attr('name')
         			console.log(search_field);
         			
-        			$(this).parents(".skema").find(".skema2").append('<div class="new_form form-group"><input class="get_input form-control" name="'+search_field+'['+isi+'][data][]" onkeyup="nospaces(this)" type="text" placeholder="New Field for '+isi+'"/></div>'); //add input box
+        			$(this).parents(".skema").find(".skema2").append('<div class="new_form d'+x+' form-group"><input class="get_input form-control" name="'+search_field+'['+isi+'][data][]" onkeyup="nospaces(this)" type="text" placeholder="New Field '+isi+'"/></div>'); //add input box
         			
         			// $(this).parents(".skema").find(".skema2").append('<div class="new_form form-group"><input class="form-control" name="field2['+isi+'][key]" type="text" placeholder="Input new field '+isi+'"/></div>');
-
-       				// CODE BEFORE line 216
-       				// $(this).parents(".skema").find(".skema3").append('<div class="new_form2 form-group"><select class="get_input2 form-control select2" name="'+search_field+'['+isi+'][type][]" style="width: 100%;"><option value="TES">TESS</option></select></div>');
-
-       				$(this).parents(".skema").find(".skema3").append('<div class="new_form2 form-group"><select class="form-control select2" name="'+search_field+'['+isi+'][type][]" style="width: 100%;" id="type">@isset($data_opsigroup) @foreach($data_opsigroup as $databaru)<optgroup label="{{ $databaru->option_grup }}">@isset($data_opsi) @foreach($data_opsi as $opsi) @if($opsi->skemaopsigroup_id == $databaru->id)<option value="{{ $opsi->name_opsi }}">{{ $opsi->value_opsi }}</option> @endif @endforeach @endisset</optgroup>@endforeach @endisset</select');
-
-        			// $(this).parents(".skema").find(".skema3").append('<div class="new_form2 form-group"><select class="get_input2 form-control select2" name="" style="width: 100%;"><option value="TES">TESS</option></select></div>');
-        			// $(this).parents(".skema").find(".skema4").append('<a href="#" class="remove_field2" title="Delete field array"><i class="fa fa-remove"></i></a>');
-        			// console.log($(this).parents(".skema").find(".skema3"))
-
-        			// console.log($('input[name="field1[key]"]')).val()
-        			// var inputan = $(".get_input").val();
-        			// var inputan = $(this).parents(".get_input")
-        			// var cobaah = $(".get_input2").attr('name',search_field+'['+isi+']['+inputan+']');
-        			// var cobaah = $(this).parents(".skema3").find("get_input2").attr('name',inputan);
-        			// console.log(inputan)
+       				$(this).parents(".skema").find(".skema3").append('<div class="new_form2 d'+x+' form-group"><select class="form-control select2" name="'+search_field+'['+isi+'][type][]" style="width: 100%;" id="type">@isset($data_opsigroup) @foreach($data_opsigroup as $databaru)<optgroup label="{{ $databaru->option_grup }}">@isset($data_opsi) @foreach($data_opsi as $opsi) @if($opsi->skemaopsigroup_id == $databaru->id)<option value="{{ $opsi->name_opsi }}">{{ $opsi->value_opsi }}</option> @endif @endforeach @endisset</optgroup>@endforeach @endisset</select>');
+              $(this).parents(".skema").find(".skema4").append('<div class="remove-button d'+x+'"><p class="remove_array"><a class="text-danger"><i class="fa fa-close"></i></a></p><br></div>');
        				
         		}
         	});
@@ -268,7 +271,7 @@ desired effect
                     var tes = fieldbaru.replace(fieldbaru,'field[field'+no+']');
                     // console.log(tes);
 
-                    $(wrapper).append('<div class="skema"><div class="col-xs-4"><input class="form-control namefield" onkeyup="nospaces(this)" type="text" name="'+tes+'[key]" placeholder="Field Name" required></div><div class="col-xs-4"><select class="form-control select2 select_type" name="'+tes+'[value]" style="width: 100%;" id="type">@isset($data_opsigroup) @foreach($data_opsigroup as $databaru)<optgroup label="{{ $databaru->option_grup }}">@isset($data_opsi) @foreach($data_opsi as $opsi) @if($opsi->skemaopsigroup_id == $databaru->id)<option value="{{ $opsi->name_opsi }}">{{ $opsi->value_opsi }}</option> @endif @endforeach @endisset</optgroup>@endforeach @endisset</select></div><p class="add_array"><a href="#" class="btn btn-danger remove_field" title="Delete"><i class="fa fa-remove"></i></a> </p><div class="col-xs-4"></div><div class="col-md-4 skema2"></div><div class="col-md-4 skema3"></div></div><br>');
+                    $(wrapper).append('<div class="skema"><div class="col-xs-4"><input class="form-control namefield" onkeyup="nospaces(this)" type="text" name="'+tes+'[key]" placeholder="Field Name"></div><div class="col-xs-4"><select class="form-control select2 select_type" name="'+tes+'[value]" style="width: 100%;" id="type">@isset($data_opsigroup) @foreach($data_opsigroup as $databaru)<optgroup label="{{ $databaru->option_grup }}">@isset($data_opsi) @foreach($data_opsi as $opsi) @if($opsi->skemaopsigroup_id == $databaru->id)<option value="{{ $opsi->name_opsi }}">{{ $opsi->value_opsi }}</option> @endif @endforeach @endisset</optgroup>@endforeach @endisset</select></div><p class="add_array"><a href="#" class="btn btn-danger remove_field" title="Delete"><i class="fa fa-remove"></i></a> </p><div class="col-xs-4"></div><div class="form-skema"><div class="col-md-4 skema2"></div><div class="col-md-3 skema3"></div></div><div class="col-md-1 skema4"></div><br></div>');
             }
         });
             
@@ -305,11 +308,30 @@ desired effect
         <script type="text/javascript">
           var x = 1;
 
-          $(document).on("click",".remove_field10", function(e){ //user click on remove text
-             e.preventDefault();
-                $(this).parent('.skema2').find('.new_form').remove();
-                $(this).parent('.skema3').find('.new_form2').remove();
-                $(this).parent('.skema3').find('.remove_field2').remove();
+          $(this.document).on("click",".remove_array", function(e){ //user click on remove text
+                alert('Yakin untuk menghapus?')
+                var w = e.preventDefault(); $(this).parents('.skema4'); x--;
+                // $(this).parent('.skema4').find('.remove_array').addClass( "highlight" );
+                var cari_button = $(this).parent('.remove-button');
+                // $(this).
+                // console.log(cari_button);
+                // var fieldbaru = $('.skema').last().find('.namefield').attr('name')
+                var cari_classhps = cari_button.append('').attr('class')
+                var wow = cari_classhps.split('remove-button')
+                var wow2 = wow[1].split('d');
+                var codenya = wow2[1].replace(wow2[1],wow2[1]+'d.');
+                // alert("w"+codenya+"w")
+                var dibalik = codenya.split("").reverse().join("")
+                // console.log($(this).parent('.skema2').find('.d'+wow[1]));
+                var cari_a1 = $(this).parents('.skema').find('.skema2')
+                var cari_a2 = $(this).parents('.skema').find('.skema3')
+                $(cari_a1).find(dibalik).empty()
+                $(cari_a2).find(dibalik).empty()
+                $(cari_button).remove()
+                // console.log(cari_a2)
+                // $(this).parent('.skema3').find('.new_form2').remove();
+                // $(this).parent('.skema3').find('.remove_field2').remove();
+
                 x--;
             })
 
@@ -323,30 +345,26 @@ desired effect
               var search_field = $(this).parents('.skema').find('.select_type').attr('name')
               // console.log(search_field);
               
-              $(this).parents(".skema").find(".skema2").last().append('<div class="new_form form-group"><input class="get_input form-control" name="'+search_field+'['+isi+'][data][]" onkeyup="nospaces(this)" type="text" placeholder="New Field for '+isi+'" required="required"/></div>'); //add input box
+              $(this).parents(".skema").find(".skema2").last().append('<div class="new_form  d'+x+' form-group"><input class="get_input form-control" name="'+search_field+'['+isi+'][data][]" onkeyup="nospaces(this)" type="text" placeholder="New Field for '+isi+'" required="required"/></div>'); //add input box
               
               // $(this).parents(".skema").find(".skema2").append('<div class="new_form form-group"><input class="form-control" name="field2['+isi+'][key]" type="text" placeholder="Input new field '+isi+'"/></div>');
 
               // CODE BEFORE line 216
               // $(this).parents(".skema").find(".skema3").append('<div class="new_form2 form-group"><select class="get_input2 form-control select2" name="'+search_field+'['+isi+'][type][]" style="width: 100%;"><option value="TES">TESS</option></select></div>');
 
-              $(this).parents(".skema").find(".skema3").last().append('<div class="new_form2 form-group"><select class="form-control select2" name="'+search_field+'['+isi+'][type][]" style="width: 100%;" id="type">@isset($data_opsigroup) @foreach($data_opsigroup as $databaru)<optgroup label="{{ $databaru->option_grup }}">@isset($data_opsi) @foreach($data_opsi as $opsi) @if($opsi->skemaopsigroup_id == $databaru->id)<option value="{{ $opsi->name_opsi }}">{{ $opsi->value_opsi }}</option> @endif @endforeach @endisset</optgroup>@endforeach @endisset</select></div>');
-
-              // $(this).parents(".skema").find(".skema3").append('<div class="new_form2 form-group"><select class="get_input2 form-control select2" name="" style="width: 100%;"><option value="TES">TESS</option></select></div>');
-              // $(this).parents(".skema").find(".skema4").append('<a href="#" class="remove_field2" title="Delete field array"><i class="fa fa-remove"></i></a>');
-              // console.log($(this).parents(".skema").find(".skema3"))
-
-              // console.log($('input[name="field1[key]"]')).val()
-              // var inputan = $(".get_input").val();
-              // var inputan = $(this).parents(".get_input")
-              // var cobaah = $(".get_input2").attr('name',search_field+'['+isi+']['+inputan+']');
-              // var cobaah = $(this).parents(".skema3").find("get_input2").attr('name',inputan);
-              // console.log(inputan)
+              $(this).parents(".skema").find(".skema3").last().append('<div class="new_form2 d'+x+' form-group"><select class="form-control select2" name="'+search_field+'['+isi+'][type][]" style="width: 100%;" id="type">@isset($data_opsigroup) @foreach($data_opsigroup as $databaru)<optgroup label="{{ $databaru->option_grup }}">@isset($data_opsi) @foreach($data_opsi as $opsi) @if($opsi->skemaopsigroup_id == $databaru->id)<option value="{{ $opsi->name_opsi }}">{{ $opsi->value_opsi }}</option> @endif @endforeach @endisset</optgroup>@endforeach @endisset</select></div>');
+              $(this).parents(".skema").find(".skema4").last().append('<div class="remove-button d'+x+'"><p class="remove_array"><a class="text-danger"><i class="fa fa-close"></i></a></p><br></div>');
               
             }
           });
 
         </script>
 @endif
+<script>
+  $(document).ready(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+  })
+</script>
 </body>
 </html>
