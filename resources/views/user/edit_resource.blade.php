@@ -59,9 +59,10 @@
                       		@php $no = 1; @endphp
 		                      @foreach($data_skema as $data)
 		                      		@if($data->type_schema == 'array')
+		                      			<br><br>
 		                     			<div class="skema">
 		                     				@php $hiha = $data->field; @endphp
-		                     			
+		                     				
 		                     				<div class="col-xs-4">
 		                     					<input type="text" class="form-control namefield" onkeyup="nospaces(this)" name="field[{{ $data->field }}][key]" value="{{ $data->name_schema }}">
 		                     				</div>
@@ -86,7 +87,7 @@
 						                     				<!-- <input type="text" class="form-control valuefield" onkeyup="nospaces(this)" name="field[{{ $data2->field }}][value][array][type][]" value="{{ $data2->type_schema }}">	 -->
 						                     				<select class="form-control select2" name="field[{{ $data->field }}][value][array][type][]" style="width: 100%;" id="type">
 						                     				<!-- <option value="{{ $data2->type_schema }}">{{ $data2->type_schema }} (Current)</option> -->
-				                     						@isset($data_opsigroup) @foreach($data_opsigroup as $databaru)<optgroup label="{{ $databaru->option_grup }}">@isset($data_opsi) @foreach($data_opsi as $opsi) @if($opsi->skemaopsigroup_id == $databaru->id) @if($data2->type_schema == $opsi->name_opsi) <option value="{{ $data2->type_schema }}" selected="selected">{{ $opsi->value_opsi }} (Current)</option>  @else <option value="{{ $opsi->name_opsi }}">{{ $opsi->value_opsi }}</option> @endif @endif  @endforeach @endisset</optgroup>@endforeach @endisset
+				                     						@isset($data_opsigroup) @foreach($data_opsigroup as $databaru)<optgroup label="{{ $databaru->option_grup }}">@isset($data_opsi) @foreach($data_opsi as $opsi) @if($opsi->skemaopsigroup_id == $databaru->id) @if($data2->type_schema == $opsi->name_opsi) <option value="{{ $data2->type_schema }}" selected="selected">{{ $opsi->value_opsi }} (Current)</option> @elseif($opsi->name_opsi == 'array') @else <option value="{{ $opsi->name_opsi }}">{{ $opsi->value_opsi }}</option> @endif @endif  @endforeach @endisset</optgroup>@endforeach @endisset
 				                     						</select>
 						                     			</div>
 						                     		</div>
